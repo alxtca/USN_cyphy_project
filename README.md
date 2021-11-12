@@ -16,3 +16,4 @@ watching git tutorial https://www.youtube.com/watch?v=RGOj5yH7evk
 
 Write your name here.
 Johannes
+Øystein
