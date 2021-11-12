@@ -15,8 +15,8 @@ Johannes
 ## Milestones
 
 1. Module(s) do work as planned separatly from the system.
-2. Modules work in combination with other modules.
-3. Relevant dokumentation made available
+2. 2. Modules work in combination with other modules.
+3. 3. Relevant dokumentation made available
 
 ## Dokumentation
 Setup: Document describing the physical setup of components within the system.
