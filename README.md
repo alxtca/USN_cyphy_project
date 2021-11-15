@@ -11,6 +11,7 @@ Hight measure system
 Group 1\
 Write your name here.\
 Johannes
+Øystein
 
 ## Milestones
 
