@@ -2,7 +2,7 @@
 
 void Coms::intro()
 {
-	std::cout << "Velkommen til høydemåler system." << std::endl;
+	std::cout <<std::endl<< "Velkommen til høydemåler system." << std::endl;
 }
 
 void Coms::menu_main()
@@ -24,6 +24,7 @@ void Coms::menu_existing()
 {
 	std::cout << "Eksterende måling:" << std::endl
 		<< "1 : Søk etter måling" << std::endl
+		<< "2 : Se alle målinger" << std::endl
 		<< "0 : Tilbake" << std::endl;
 }
 
@@ -51,7 +52,7 @@ int Coms::get_menu_int(int options)//Ask for int within range 0 <= input <= opti
 	std::cout << std::endl;
 	for (int i = 0; i <= options; i++) { //go through and check if input matches and int in options
 		if (std::to_string(i) == input) {
-			return i;
+			return i; // Return chosen int within range 0 <= input <= options
 		}
 	}
 	wrong_input();

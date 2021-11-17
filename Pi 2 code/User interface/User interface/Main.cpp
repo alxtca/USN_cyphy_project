@@ -1,11 +1,23 @@
-#include "User.h"
 #include "Coms.h"
+#include "database.h"
 
 int main()
 {
-    Coms user_comms;
+
+    Database DB; // SQL database
+    DB.create_table();// Create the table in database
+    Coms user_comms; // Input / Output / Error Messages
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
+
+   
+    //test data start -------------------
+    /*
+    DB.write_user("user1", 180);
+    DB.view_database();
+    */
+    //test data slutt -------------------
+
 
     user_comms.intro();
 
@@ -39,11 +51,18 @@ int main()
             if (um == 1) {// new user
                 m = 2;//----temp---loop meny---- 
                 um = 0;
+                
+                std::string user = "";
+                int hight = 0;
                 // --------------------------TO DO---------------------------------------
-                    // create new user and get hight data
+                //Get goes here:
+                //hight = get_hight();
+                // --------------------------TO DO---------------------------------------
+                 
+                std::cout << "Ditt navn: ";
+                std::cin >>user;
+                DB.write_user(user, hight);
 
-                   // save new user with hight data and time
-                // --------------------------TO DO---------------------------------------
             }
             else if (um == 0) {//return to main
                 m = 1;
@@ -60,26 +79,21 @@ int main()
         }
         else if (m == 3) {// menu for getting exicting user data
             user_comms.menu_existing();
-            um = user_comms.get_menu_int(1);
+            um = user_comms.get_menu_int(2);
             if (um == 1) {
-                m = 3;//----temp---loop meny----
+                m = 3;//---loop back to existing meny----
                 um = 0;
-                /*
-             --------------------------TO DO---------------------------------------
-                std::string username;// holds string input
-                std::cout << "Name of user:  ";
-                std::cin >> username;
-                if(fund_user(username==true)){
-                    //display user name and data
-                    username="";//reset username
-                }
-                else{
-                std::cout << "Now user with name "<< username<<" found in system."<<std::endl;
-                username = ""//reset username
-                }
-             --------------------------TO DO---------------------------------------
-                */
 
+                std::string user = "";
+                std::cout << "Ditt navn: ";
+                std::cin >> user;
+                DB.read_user(user);
+
+            }
+            else if (um == 2) {
+                m = 3;//---loop back to existing meny----
+                um = 0;
+                DB.view_database();
             }
             else if (um == 0) {//return to main
                 m = 1;
@@ -96,6 +110,7 @@ int main()
         }
         else if (m == 0) {// exit programm
             user_comms.end();
+            DB.clear_database(); // Clear data from database
             m = -1;
         }
         else {// Error, m out of range
