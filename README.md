@@ -2,16 +2,11 @@
 
 Hight measure system
 
-## Local Development
-
-1. b4
-
 ## Contributors
 
-Group 1\
-Write your name here.\
 Johannes
 Øystein
+Alexandr
 
 ## Milestones
 
@@ -19,11 +14,7 @@ Johannes
 2. Modules work in combination with other modules.
 3. Relevant dokumentation made available.
 
-## Dokumentation
+## Documentation
 Setup: Document describing the physical setup of components within the system.\
 Code: Code has sufficient innline descriptions to be understood by others.\
 Manual: Document describing systems use for users.
-
-## Tutorial Links
-
-watching git tutorial https://www.youtube.com/watch?v=RGOj5yH7evk
