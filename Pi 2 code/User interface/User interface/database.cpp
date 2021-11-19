@@ -39,7 +39,8 @@ void Database::create_table()
         /*SQL statment for table creation*/
         exit = sqlite3_exec(DB, "CREATE TABLE USER(" \
             "NAME TEXT PRIMARY KEY NOT NULL,"\
-            "HIGHT INT NOTT NULL ); ", callback, 0, &error_message);
+            "HIGHT INT NOTT NULL,"\
+            "TIME TIMESTAMP WITHOUT TIME ZONE); ", callback, 0, &error_message);
 
         test_open(exit, "Table created successfully"); //Check if table created successfully
     }
@@ -53,7 +54,7 @@ void Database::write_user(std::string name, int hight)
 
     if (!exit) {//Database opened succsessfully
         /*Create string for sql Query*/
-        std::string sql = "INSERT INTO USER (NAME,HIGHT) VALUES('"+name+"',"+std::to_string(hight)+")";
+        std::string sql = "INSERT INTO USER (NAME,HIGHT,TIME) VALUES('"+name+"',"+std::to_string(hight)+",'"+__TIMESTAMP__+"')";
         /*SQL statment for inserting user into table*/
         exit = sqlite3_exec(DB,sql.c_str(), callback, 0, &error_message);
         test_open(exit, "Innsert to table successfully");
