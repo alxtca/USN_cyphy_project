@@ -4,9 +4,9 @@ Hight measure system
 
 ## Contributors
 
-Johannes
-Øystein
-Alexandr
+Johannes <br>
+Øystein<br>
+Alexandr<br>
 
 ## Milestones
 
