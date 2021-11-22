@@ -12,10 +12,10 @@ int main()
 
    
     //test data start -------------------
-    /*
+    
     DB.write_user("user1", 180);
     DB.view_database();
-    */
+    
     //test data slutt -------------------
 
 

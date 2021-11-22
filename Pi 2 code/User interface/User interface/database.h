@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <ctime>
 #include <string>
 #include "sqlite3/sqlite3.h"
 
@@ -15,6 +16,7 @@ class Database
 		char *error_message = 0;
 		/*Used in sqlite3_exec*/
 		static int callback(void* NotUsed, int argc, char** argv, char** azColName);
+		
 
 	public:
 		/*Opens the database*/
