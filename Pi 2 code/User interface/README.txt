@@ -16,3 +16,6 @@ Add this file to your project dependencies at
 Project Properties -> Configuration Properties -> Linker -> Input -> Additional Dependencies 
 (you'll have to type it in manually as you can't browse). 
 Compiling in Visual Studio should now work successfully.
+
+For linux
+sudo apt-get install sqlite3
