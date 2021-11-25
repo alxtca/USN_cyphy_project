@@ -2,6 +2,7 @@
 #include "database.h"
 #include "take-height-measurement.h"
 
+
 int main(int argc, char *argv[])
 {
 
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
                 m = 2;//----temp---loop meny---- 
                 um = 0;
                 
-                std::string user = "";
+
                 int hight = 0; // dummy for local test
                  
                 std::cout << "Ditt navn: ";
