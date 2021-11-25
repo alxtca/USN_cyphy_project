@@ -1,8 +1,6 @@
-
-// what to implement in main
-#include "take-height-measurement.h"
+#include "read-distance-and-update-xml.h"
 
 int main()
 {
-    int height = takeHeightMeasurement();
+    int result = readDistanceAndUpdateXml();
 }
