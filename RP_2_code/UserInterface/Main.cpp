@@ -56,17 +56,19 @@ int main(int argc, char *argv[])
                 
 
                 int hight = 0; // dummy for local test
+                std::string user;
                  
                 std::cout << "Ditt navn: ";
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
                 int x = 0; // For if button pressed
+                int height;
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
                     if(x==0){ // Button pressed
-                        int height = takeHeightMeasurement();
+                        height = takeHeightMeasurement();
                         z = 1; // Breaks loop
                         x = 1; // Stopps if
                     }
