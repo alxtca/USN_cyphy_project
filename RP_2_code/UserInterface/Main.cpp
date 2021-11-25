@@ -1,5 +1,7 @@
 #include "Coms.h"
 #include "database.h"
+#include "take-height-measurement.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -52,16 +54,28 @@ int main(int argc, char *argv[])
                 m = 2;//----temp---loop meny---- 
                 um = 0;
                 
-                std::string user = "";
-                int hight = 0;
-                // --------------------------TO DO---------------------------------------
-                //Get goes here:
-                //hight = get_hight();
-                // --------------------------TO DO---------------------------------------
+
+                int hight = 0; // dummy for local test
                  
                 std::cout << "Ditt navn: ";
                 std::cin >>user;
-                DB.write_user(user, hight);
+                
+                int z = 0; // For loop, waiting on button
+                int x = 0; // For if button pressed
+      
+                // --------------------------TO DO, ADD BUTTON---------------------------------------
+                while(z==0){ // While button not pressed
+                    if(x==0){ // Button pressed
+                        int height = takeHeightMeasurement();
+                        z = 1; // Breaks loop
+                        x = 1; // Stopps if
+                    }
+                }
+                // --------------------------TO DO, ADD BUTTON---------------------------------------
+                
+               // DB.write_user(user, hight); // For local test
+                DB.write_user(user, height);
+                user = ""; // Reset user name
 
             }
             else if (um == 0) {//return to main
