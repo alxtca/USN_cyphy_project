@@ -8,8 +8,6 @@ Hight measure system
 
 ## Contributors
 
-Group 1\
-Write your name here.\
 Johannes
 Øystein
 
