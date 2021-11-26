@@ -9,7 +9,7 @@ class Database
 
 	private: 
 		/*Name of the database*/
-		std::string database_name ="HightMeasure.db";
+		std::string database_name ="HeightMeasure.db";
 		/*Pointer to the database*/
 		sqlite3 *DB;
 		/*Error message for SQL errors*/
