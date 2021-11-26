@@ -26,7 +26,7 @@ class Database
 		/*Create a table in database*/
 		void create_table();
 		/*Insert a new user into database*/
-		void write_user(std::string name, int hight);
+		void write_user(std::string name, int height);
 		/*Finds if User with name (Name), if so, prints*/
 		void read_user(std::string name);
 		/*Closes the database*/
