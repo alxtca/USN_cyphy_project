@@ -1,6 +1,7 @@
 #include "Coms.h"
 #include "database.h"
 #include "take-height-measurement.h"
+#include "read-distance-and-update-xml.h"
 
 
 int main(int argc, char *argv[])
@@ -33,6 +34,10 @@ int main(int argc, char *argv[])
             }
             else if (um == 2) { // go to m3, menu for exicting user
                 m = 3;
+                um = 0;
+            }
+            else if (um == 3) { // go to m4, menu for settings
+                m = 4;
                 um = 0;
             }
             else if (um == 0) {// go to m0, end programm
@@ -131,7 +136,10 @@ int main(int argc, char *argv[])
                 m = 4;//---loop back to settings menu----
                 um = 0;
                 //----------------------------- TO DO --------------------------------
-                //
+                if (readDistanceAndUpdateXml() == 1) {
+                    std::cout << "Xml: Read/Uppdate Successful" << std::endl;
+                }
+                else user_comms.error_message("Error reading/uppdating xml");
                 //----------------------------- TO DO --------------------------------
 
             }
