@@ -2,35 +2,44 @@
 
 void Coms::intro()
 {
-	std::cout <<std::endl<< "Velkommen til høydemåler system." << std::endl;
+	std::cout <<std::endl<< "Velkommen til hÃ¸ydemÃ¥ler system." << std::endl;
 }
 
 void Coms::menu_main()
 {
-	std::cout << "Velg den tjenesten du har lyst å burke:" << std::endl
-		<< "1 : Ny Måling" << std::endl
-		<< "2 : Eksiterende Måling" << std::endl
+	std::cout << "Velg den tjenesten du har lyst Ã¥ burke:" << std::endl
+		<< "1 : Ny MÃ¥ling" << std::endl
+		<< "2 : Eksiterende MÃ¥ling" << std::endl
 		<< "0 : Avslutt systemet" << std::endl;
 }
 
 void Coms::menu_new()
 {
-	std::cout << "Ny måling:" << std::endl
-		<< "1 : Skap ny måling" << std::endl
+	std::cout << "Ny mÃ¥ling:" << std::endl
+		<< "1 : Skap ny mÃ¥ling" << std::endl
 		<< "0 : Tilbake" << std::endl;
 }
 
 void Coms::menu_existing()
 {
-	std::cout << "Eksterende måling:" << std::endl
-		<< "1 : Søk etter måling" << std::endl
-		<< "2 : Se alle målinger" << std::endl
+	std::cout << "Eksterende mÃ¥ling:" << std::endl
+		<< "1 : SÃ¸k etter mÃ¥ling" << std::endl
+		<< "2 : Se alle mÃ¥linger" << std::endl
 		<< "0 : Tilbake" << std::endl;
+}
+
+void Coms::menu_settings()
+{
+	std::cout << "Instillinger:" << std::endl
+		<< "1 : Start Oppsett" << std::endl
+		<< "2 : Nullstill hÃ¸yde mÃ¥ler" << std::endl
+		<< "0 : Tilbake" << std::endl;
+
 }
 
 void Coms::end()
 {
-	std::cout << "Takk for bruken av høydemåler system ." << std::endl;
+	std::cout << "Takk for bruken av hÃ¸ydemÃ¥ler system ." << std::endl;
 }
 
 void Coms::error_message(std::string error)
@@ -41,13 +50,13 @@ void Coms::error_message(std::string error)
 
 void Coms::wrong_input()
 {
-	std::cout << "Det har ser ut skrever inn ugyldig input, prøv igjenn." << std::endl << std::endl;
+	std::cout << "Det har ser ut skrever inn ugyldig input, prÃ¸v igjenn." << std::endl << std::endl;
 }
 
 int Coms::get_menu_int(int options)//Ask for int within range 0 <= input <= options
 {
 	std::string input; //what user writes in console.
-	std::cout << "Skriv inn verdi for ønsket handling: ";
+	std::cout << "Skriv inn verdi for Ã¸nsket handling: ";
 	std::cin >> input; //get uset input
 	std::cout << std::endl;
 	for (int i = 0; i <= options; i++) { //go through and check if input matches and int in options

@@ -12,6 +12,8 @@ public:
 	void menu_new(); 
 	/*Menu for getting exicting user data*/
 	void menu_existing();
+	/*Menu for system settings*/
+	void menu_settings();
 	/*Goodbye message*/
 	void end();
 	/*Message when something goes wrong*/
