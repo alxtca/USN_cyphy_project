@@ -1,1 +1,0 @@
-int sendRequest(char* msg);
