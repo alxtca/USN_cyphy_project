@@ -17,6 +17,28 @@ int main()
 #include <fstream>
 #include <string>
 #include "send-distance-request.h"
+#include "tinyxml2.h"
+
+#define XMLDOC "data.xml"
+#define SENSORTAG "sensor"
+
+int storeHeightInXML(int new_sensor_position){
+	tinyxml2::XMLDocument xml_doc; //create xml document
+  tinyxml2::XMLError eResult = xml_doc.LoadFile(XMLDOC);
+  if (eResult != tinyxml2::XML_SUCCESS) return false;
+
+  tinyxml2::XMLNode* root = xml_doc.FirstChildElement("root");
+  if (root == nullptr) return false;
+
+  tinyxml2::XMLElement* element = root->FirstChildElement(SENSORTAG);
+  if (element == nullptr) return false;
+
+  //set new value into tag "sensor"
+  element->SetText(new_sensor_position);
+  xml_doc.SaveFile(XMLDOC);
+
+  return true;
+}
 
 int readDistanceAndUpdateXml() {
     //request distance
@@ -31,12 +53,12 @@ int readDistanceAndUpdateXml() {
         std::cout << "height is: " << distance << std::endl;
     }
 
-    //store height into data.txt //replace with write to data.xml //write to tag <sensor position>
-    std::ofstream MyFile("data.txt");
-    MyFile << distance;
-    MyFile.close();
-
-    std::cout << "data saved: " << distance << std::endl;
+    //store sensor position in tag "sensor" in file data.txt 
+    if (storeHeightInXML(distance)){
+        std::cout << "data saved: " << distance << std::endl;
+    } else {
+        std::cout << "something went wrong " << std::endl;
+    }
 
     return 1;
 }
