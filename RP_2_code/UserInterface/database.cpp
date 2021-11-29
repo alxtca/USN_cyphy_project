@@ -1,4 +1,6 @@
+
 #include "database.h"
+
 
 
 int Database::callback(void* NotUsed, int argc, char** argv, char** azColName)
@@ -14,7 +16,7 @@ int Database::callback(void* NotUsed, int argc, char** argv, char** azColName)
 int Database::open_database()
 {
     int exit = 0;
-    exit = sqlite3_open("HightMeasure.db", &DB); //opens the database
+    exit = sqlite3_open(database_name, &DB); //opens the database
     test_open(exit, "DB Open: "); //Check if database opened succsessfully
     
     return exit;
@@ -48,13 +50,13 @@ void Database::create_table()
 
 }
 
-void Database::write_user(std::string name, int hight)
+void Database::write_user(std::string name, int height)
 {
     int exit = open_database();
 
     if (!exit) {//Database opened succsessfully
         /*Create string for sql Query*/
-        std::string sql = "INSERT INTO USER (NAME,HIGHT,TIME) VALUES('"+name+"',"+std::to_string(hight)+",'"+__TIMESTAMP__+"')";
+        std::string sql = "INSERT INTO USER (NAME,HIGHT,TIME) VALUES('"+name+"',"+std::to_string(height)+",'"+__TIMESTAMP__+"')";
         /*SQL statment for inserting user into table*/
         exit = sqlite3_exec(DB,sql.c_str(), callback, 0, &error_message);
         test_open(exit, "Innsert to table successfully");

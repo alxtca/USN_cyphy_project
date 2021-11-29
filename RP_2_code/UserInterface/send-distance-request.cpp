@@ -1,3 +1,4 @@
+//see example below main()
 #include<stdio.h>
 #include<string.h>	//strlen
 #include<sys/socket.h>
@@ -47,4 +48,19 @@ int sendRequest(char * msg){
 	return height;
 }
 
-//g++ -o client client.cpp
+/*
+//purpose is
+// to demonstrate how to include sendRequest() into main program
+#include "send-height-request.h"
+#include <iostream>
+int main(){
+    char request_message[] = "height";
+    int height = sendRequest(request_message);
+    if (height == 10000){
+        std::cout << "bad request" << std::endl;
+    } else {
+        std::cout << "height is: " << height << std::endl;
+    }
+    return 0;
+}
+*/

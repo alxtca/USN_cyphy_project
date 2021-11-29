@@ -1,6 +1,8 @@
 #include "Coms.h"
 #include "database.h"
 #include "take-height-measurement.h"
+#include "read-distance-and-update-xml.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +36,10 @@ int main(int argc, char *argv[])
                 m = 3;
                 um = 0;
             }
+            else if (um == 3) { // go to m4, menu for settings
+                m = 4;
+                um = 0;
+            }
             else if (um == 0) {// go to m0, end programm
                 m = 0;
                 um = 0;
@@ -50,22 +56,24 @@ int main(int argc, char *argv[])
             user_comms.menu_new();
             um = user_comms.get_menu_int(1);
             if (um == 1) {// new user
-                m = 2;//----temp---loop meny---- 
+                m = 2;//----loop back to new user menu---- 
                 um = 0;
                 
-                std::string user = "";
+
                 int hight = 0; // dummy for local test
+                std::string user;
                  
                 std::cout << "Ditt navn: ";
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
                 int x = 0; // For if button pressed
+                int height;
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
                     if(x==0){ // Button pressed
-                        int height = takeHeightMeasurement();
+                        height = takeHeightMeasurement();
                         z = 1; // Breaks loop
                         x = 1; // Stopps if
                     }
@@ -94,7 +102,7 @@ int main(int argc, char *argv[])
             user_comms.menu_existing();
             um = user_comms.get_menu_int(2);
             if (um == 1) {
-                m = 3;//---loop back to existing meny----
+                m = 3;//---loop back to existing menu----
                 um = 0;
 
                 std::string user = "";
@@ -104,7 +112,7 @@ int main(int argc, char *argv[])
 
             }
             else if (um == 2) {
-                m = 3;//---loop back to existing meny----
+                m = 3;//---loop back to existing menu----
                 um = 0;
                 DB.view_database();
             }
@@ -112,8 +120,43 @@ int main(int argc, char *argv[])
                 m = 1;
                 um = 0;
             }
-            else if (um == -1) {//wrong input, return to meny
+            else if (um == -1) {//wrong input, return to menu
                 m = 3;
+                um = 0;
+            }
+            else {// error, um out of range
+                user_comms.error_message("user input(um) out of range");
+            }
+
+        }
+         else if (m == 4) {// menu for system settings
+            user_comms.menu_settings();
+            um = user_comms.get_menu_int(2);
+            if (um == 1) { // Read XMl file and save system values
+                m = 4;//---loop back to settings menu----
+                um = 0;
+                //----------------------------- TO DO --------------------------------
+                if (readDistanceAndUpdateXml() == 1) {
+                    std::cout << "Xml: Read/Uppdate Successful" << std::endl;
+                }
+                else user_comms.error_message("Error reading/uppdating xml");
+                //----------------------------- TO DO --------------------------------
+
+            }
+            else if (um == 2) { // Renew default height sensor distance
+                m = 4;//---loop back to settings menu----
+                um = 0;
+                //----------------------------- TO DO ---------------------------------
+                
+                //----------------------------- TO DO ---------------------------------
+                
+            }
+            else if (um == 0) {//return to main
+                m = 1;
+                um = 0;
+            }
+            else if (um == -1) {//wrong input, return to menu
+                m = 4;
                 um = 0;
             }
             else {// error, um out of range

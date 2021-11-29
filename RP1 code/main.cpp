@@ -9,17 +9,11 @@
 #include <iostream>
 #include "measure-height.h"
 
-//to be replaced with GPIO program
-int measureHeight(){
-    std::cout << "returning height";
-    return 180;
-}
-
-int main(int argc , char *argv[]){
+int main(){
     char message_received[80];
 	int socket_desc , new_socket , c;
 	struct sockaddr_in server , client;
-	char *message;
+	//char *message;
 	
 	//Create socket
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -70,4 +64,4 @@ int main(int argc , char *argv[]){
 	
 	return 0;
 }
-//g++ -o liveserver liveserver.cpp
+// g++ main.cpp measure-height.cpp RS-232/rs232.c -Wall -Wextra -o2 -o rp1main
