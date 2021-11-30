@@ -21,7 +21,7 @@ For linux
 sudo apt-get install sqlite3
 
 in userinterface file path
-bash: g++ -Wall -g -0 RP2 Main.cpp Coms.h Coms.cpp database.h database.cpp send-height-request.h send-height-request.cpp -lsqlite3
+bash: g++ -Wall -g -o RP2 Main.cpp database.h database.cpp Coms.h Coms.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h tinyxml2.cpp -lsqlite3
 A file RP2 will then appear in that file path.
 Double click file --> Execute in Terminal
 You can now navigate the console for RP2
