@@ -10,6 +10,7 @@ void Coms::menu_main()
 	std::cout << "Velg den tjenesten du har lyst å burke:" << std::endl
 		<< "1 : Ny Måling" << std::endl
 		<< "2 : Eksiterende Måling" << std::endl
+		<< "3 : Settings" << std::endl
 		<< "0 : Avslutt systemet" << std::endl;
 }
 
