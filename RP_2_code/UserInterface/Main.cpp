@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     while (m >= 0) {
         if (m == 1) { // Main menu
             user_comms.menu_main();
-            um = user_comms.get_menu_int(2);
+            um = user_comms.get_menu_int(3);
             if (um == 1) { // go to m2, menu for new user
                 m = 2;
                 um = 0;
