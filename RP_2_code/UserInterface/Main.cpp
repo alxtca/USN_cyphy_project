@@ -85,7 +85,9 @@ int main(int argc, char *argv[])
                 DB.write_user(user, height);
                 user = ""; // Reset user name
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
-                //DB.get_user() // returns string vector with name and height
+                std::vector<std::string> test = DB.get_user(); // returns string vector with name and height
+                std::cout << std::endl << "Name: " << test[0] << std::endl
+                    << "Height: " << test[1] << std::endl;
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
             }
