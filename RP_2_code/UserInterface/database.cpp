@@ -3,20 +3,34 @@
 
 
 
-int Database::callback(void* NotUsed, int argc, char** argv, char** azColName)
+int Database::callback(void* NotUsed, int num_results, char** values, char** columns)
 {
     int i;
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    for (i = 0; i < num_results; i++) {
+        printf("%s = %s\n", columns[i], values[i] ? values[i] : "NULL");
     }
     printf("\n");
+    return 0;
+}
+
+int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
+{
+    if (num_results == 1) {
+        user.push_back(values[0]);
+        user.push_back(values[1]);
+    }
+    else
+    {
+        std::cout << "ERROR save_callback"<<std::endl;
+    }
+
     return 0;
 }
 
 int Database::open_database()
 {
     int exit = 0;
-    exit = sqlite3_open(database_name, &DB); //opens the database
+    exit = sqlite3_open(database_name.c_str(), &DB); //opens the database
     test_open(exit, "DB Open: "); //Check if database opened succsessfully
     
     return exit;
@@ -76,6 +90,21 @@ void Database::read_user(std::string name)
         test_open(exit, "Read from table successfull");
     }
     close_database();
+}
+
+std::vector<std::string> Database::get_user(void)
+{
+    int exit = open_database();
+    if (!exit) {//Database opened succsessfully
+        /*Create string for sql Query*/
+        std::string sql = "SELECT * FROM USER ORDER BY column DESC LIMIT 1";
+        /*SQL statment for finding user in table*/
+        exit = sqlite3_exec(DB, sql.c_str(), save_callback, 0, &error_message);
+        test_open(exit, "Read from table successfull");
+    }
+
+    return user;
+    
 }
 
 void Database::close_database()

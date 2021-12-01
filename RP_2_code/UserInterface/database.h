@@ -1,8 +1,9 @@
 #include <iostream>
+#include <vector>
 #include <ctime>
 #include <string>
-//#include "sqlite3/sqlite3.h"  //For windows
-# include <sqlite3.h> //For Linux
+#include "sqlite3/sqlite3.h"  //For windows
+//# include <sqlite3.h> //For Linux
 
 class Database
 {
@@ -14,8 +15,12 @@ class Database
 		sqlite3 *DB;
 		/*Error message for SQL errors*/
 		char *error_message = 0;
+		/*Temp saved user data*/
+		static std::vector<std::string> user;
 		/*Used in sqlite3_exec*/
-		static int callback(void* NotUsed, int argc, char** argv, char** azColName);
+		static int callback(void* NotUsed, int num_results, char** values, char** columns);
+		/*Used in sqlite3_exec(SELECT) for saving retuned values */
+		static int save_callback(void* NotUsed, int num_results, char** values, char** columns);
 		
 
 	public:
@@ -29,6 +34,7 @@ class Database
 		void write_user(std::string name, int height);
 		/*Finds if User with name (Name), if so, prints*/
 		void read_user(std::string name);
+		std::vector<std::string> get_user(void);
 		/*Closes the database*/
 		void close_database();
 		/*Se all of database content*/

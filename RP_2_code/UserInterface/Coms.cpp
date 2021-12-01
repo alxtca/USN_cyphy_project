@@ -34,6 +34,7 @@ void Coms::menu_settings()
 	std::cout << "Instillinger:" << std::endl
 		<< "1 : Start Oppsett" << std::endl
 		<< "2 : Nullstill høyde måler" << std::endl
+		<< "3 : Slett database tabell" << std::endl
 		<< "0 : Tilbake" << std::endl;
 
 }

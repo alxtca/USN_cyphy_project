@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
                 um = 0;
                 
 
-                int hight = 0; // dummy for local test
+                //int hight = 0; // dummy for local test
                 std::string user;
                  
                 std::cout << "Ditt navn: ";
@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
+                    // x = check_button(); // checks button
                     if(x==0){ // Button pressed
                         height = takeHeightMeasurement();
                         z = 1; // Breaks loop
@@ -83,6 +84,9 @@ int main(int argc, char *argv[])
                // DB.write_user(user, hight); // For local test
                 DB.write_user(user, height);
                 user = ""; // Reset user name
+                // --------------------------TO DO, ADD LCD screen---------------------------------------
+                //DB.get_user() // returns string vector with name and height
+                // --------------------------TO DO, ADD LCD screen---------------------------------------
 
             }
             else if (um == 0) {//return to main
@@ -146,10 +150,16 @@ int main(int argc, char *argv[])
             else if (um == 2) { // Renew default height sensor distance
                 m = 4;//---loop back to settings menu----
                 um = 0;
-                //----------------------------- TO DO ---------------------------------
+                if (readDistanceAndUpdateXml() == 1) {
+                    std::cout << "Xml: Read/Uppdate Successful" << std::endl;
+                }
+                else user_comms.error_message("Error reading/uppdating xml");
                 
-                //----------------------------- TO DO ---------------------------------
-                
+            }
+            else if (um == 3) { // Clear database
+                m = 4;//---loop back to settings menu----
+                um = 0;
+                DB.clear_database(); // Clear data from database
             }
             else if (um == 0) {//return to main
                 m = 1;
@@ -166,7 +176,7 @@ int main(int argc, char *argv[])
         }
         else if (m == 0) {// exit programm
             user_comms.end();
-            DB.clear_database(); // Clear data from database
+          
             m = -1;
         }
         else {// Error, m out of range
