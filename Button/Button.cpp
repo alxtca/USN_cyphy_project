@@ -12,7 +12,10 @@
 * From top menu, select 'Build' > 'Set Build Commands' > Add '-lwiringPi' 
 * to "C++ commands" 1 and 2 (command row). Refer to image if unclear.
 * 
-* Might have to find simular steps for VS Code or other environment.
+* Compile with Terminal: Add command -lwiringPi (See bottom)
+* 
+* Might have to find simular steps if user wants to compile with VS Code 
+* or other environment.
 */
 
 //Global variables for interrupt handling
@@ -62,5 +65,6 @@ int main()
 	return 0;
 }
 
+//g++ Button.cpp -Wall -Wextra -lwiringPi -o button
 
 
