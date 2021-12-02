@@ -8,17 +8,16 @@ int main(int argc, char *argv[])
 {
 
     Database DB; // SQL database
-    DB.create_table();// Create the table in database
     Coms user_comms; // Input / Output / Error Messages
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
 
    
     //test data start -------------------
-    
+    /*
     DB.write_user("user1", 180);
     DB.view_database();
-    
+    */
     //test data slutt -------------------
 
 
@@ -85,9 +84,7 @@ int main(int argc, char *argv[])
                 DB.write_user(user, height);
                 user = ""; // Reset user name
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
-                std::vector<std::string> test = DB.get_user(); // returns string vector with name and height
-                std::cout << std::endl << "Name: " << test[0] << std::endl
-                    << "Height: " << test[1] << std::endl;
+                DB.get_user(); // returns string vector with name and height
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
             }
@@ -137,13 +134,14 @@ int main(int argc, char *argv[])
         }
          else if (m == 4) {// menu for system settings
             user_comms.menu_settings();
-            um = user_comms.get_menu_int(2);
+            um = user_comms.get_menu_int(3);
             if (um == 1) { // Read XMl file and save system values
                 m = 4;//---loop back to settings menu----
                 um = 0;
                 //----------------------------- TO DO --------------------------------
+                DB.create_table();// Create the table in database
                 if (readDistanceAndUpdateXml() == 1) {
-                    std::cout << "Xml: Read/Uppdate Successful" << std::endl;
+                    std::cout << "Xml: Read/Uppdate Successful" << std::endl << std::endl;
                 }
                 else user_comms.error_message("Error reading/uppdating xml");
                 //----------------------------- TO DO --------------------------------
