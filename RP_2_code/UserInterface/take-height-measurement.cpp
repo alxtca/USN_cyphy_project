@@ -13,8 +13,8 @@ int takeHeightMeasurement() {
 
     //request distance from RP1
     char request_message[] = "height";
-    int distance = sendRequest(request_message);
-
+    int distance = sendRequest(request_message); // For Live system, // line below
+    //int distance = 100; // For local test, // line above
     return calculateHeight(distance);
 }
 

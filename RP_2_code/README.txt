@@ -25,3 +25,15 @@ bash: g++ -Wall -g -o RP2 Main.cpp database.h database.cpp Coms.h Coms.cpp read-
 A file RP2 will then appear in that file path.
 Double click file --> Execute in Terminal
 You can now navigate the console for RP2
+
+
+For (live system) / (local test on windows)
+Go into the following files:
+
+database.h, follow instructions at topp of file.
+
+take-height-measurment.cpp and within int takeHeightMeasurement(), follow instructions on what lines to add //
+
+send-distance-request.h, follow instructions at topp of file.
+
+send-distance-request.cpp, follow instructions at topp of file.
