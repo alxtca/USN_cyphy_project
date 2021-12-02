@@ -15,19 +15,19 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
 
 int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
 {
-
     if (num_results == 2) {
         std::string n = "Bruker: ";// Resets last name 
-        std::string h = "Høyde : ";// Resets last height
+        std::string h = "Hï¿½yde : ";// Resets last height
 
         n.append(values[0]);    // eks: "Bruker: username"
-        h.append(values[1]);    // eks: "Høyde : 180"
+        h.append(values[1]);    // eks: "Hï¿½yde : 180"
 
-        h.append(" cm");        // eks: "Høyde : 180 cm"
+        h.append(" cm");        // eks: "Hï¿½yde : 180 cm"
 
         //------test values--------
         std::cout << std::endl << n << std::endl << h << std::endl << std::endl;
         //------test values--------
+
     }
     else
     {
@@ -36,7 +36,6 @@ int Database::save_callback(void* NotUsed, int num_results, char** values, char*
 
     return 0;
 }
-
 
 int Database::open_database()
 {
@@ -65,6 +64,7 @@ void Database::create_table()
     if (!exit) { //Database opened succsessfully
         /*SQL statment for table creation*/
         exit = sqlite3_exec(DB, "CREATE TABLE USER(" \
+
             "ID INTEGER PRIMARY KEY AUTOINCREMENT,"\
             "NAME TEXT NOT NULL,"\
             "HEIGHT INT NOTT NULL,"\
@@ -104,6 +104,7 @@ void Database::read_user(std::string name)
     close_database();
 }
 
+
 void Database::get_user(void)
 {
     int exit = open_database();
@@ -115,6 +116,7 @@ void Database::get_user(void)
         test_open(exit, "Get data from table successfull");
     }
     close_database();
+
 }
 
 void Database::close_database()
@@ -134,6 +136,7 @@ void Database::view_database()
         std::cout <<"View Database "<<std::endl;
         /*SQL statment for printing all users in table*/
         sqlite3_exec(DB, "SELECT NAME,HEIGHT FROM USER", callback, 0, &error_message);
+
     }
     close_database();
 }

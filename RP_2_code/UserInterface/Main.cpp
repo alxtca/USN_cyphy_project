@@ -14,10 +14,12 @@ int main(int argc, char *argv[])
 
    
     //test data start -------------------
+
     /*
     DB.write_user("user1", 180);
     DB.view_database();
     */
+
     //test data slutt -------------------
 
 
@@ -84,7 +86,9 @@ int main(int argc, char *argv[])
                 DB.write_user(user, height);
                 user = ""; // Reset user name
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
+
                 DB.get_user(); // returns string vector with name and height
+
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
             }
@@ -134,7 +138,9 @@ int main(int argc, char *argv[])
         }
          else if (m == 4) {// menu for system settings
             user_comms.menu_settings();
+
             um = user_comms.get_menu_int(3);
+
             if (um == 1) { // Read XMl file and save system values
                 m = 4;//---loop back to settings menu----
                 um = 0;
@@ -142,6 +148,7 @@ int main(int argc, char *argv[])
                 DB.create_table();// Create the table in database
                 if (readDistanceAndUpdateXml() == 1) {
                     std::cout << "Xml: Read/Uppdate Successful" << std::endl << std::endl;
+
                 }
                 else user_comms.error_message("Error reading/uppdating xml");
                 //----------------------------- TO DO --------------------------------

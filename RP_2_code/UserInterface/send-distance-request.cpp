@@ -50,6 +50,7 @@ int sendRequest(char * msg){
 }
 // For local test add */ before this comment
 
+
 /*
 //purpose is
 // to demonstrate how to include sendRequest() into main program
