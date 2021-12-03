@@ -1,4 +1,4 @@
-#include "Coms.h"
+#include "language.h"
 #include "database.h"
 #include "take-height-measurement.h"
 #include "read-distance-and-update-xml.h"
@@ -6,9 +6,24 @@
 
 int main(int argc, char *argv[])
 {
+    /*Choose language for human interaction*/
+    std::string language = choose_language();
+    if (language == "EN") {
+        #include "Coms_EN.h"
+        Coms user_comms; // Input / Output / Error Messages
+        Database DB('EN'); // SQL database with output language
+    }
+    else if (language == "NO") {
+        #include "Coms_NO.h"
+        Coms user_comms; // Input / Output / Error Messages
+        Database DB('NO'); // SQL database with output language
+    }
+    else std::cout << "ERROR: Main/language choice" << std::endl;
 
-    Database DB; // SQL database
-    Coms user_comms; // Input / Output / Error Messages
+    
+
+    
+    
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
 
@@ -64,7 +79,7 @@ int main(int argc, char *argv[])
                 //int hight = 0; // dummy for local test
                 std::string user;
                  
-                std::cout << "Ditt navn: ";
+                user_comms.ask_for_name();
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
@@ -113,7 +128,7 @@ int main(int argc, char *argv[])
                 um = 0;
 
                 std::string user = "";
-                std::cout << "Ditt navn: ";
+                user_comms.ask_for_name();   
                 std::cin >> user;
                 DB.read_user(user);
 

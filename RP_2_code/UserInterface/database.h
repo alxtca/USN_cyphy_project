@@ -11,6 +11,8 @@ class Database
 	private: 
 		/*Name of the database*/
 		std::string database_name ="HeightMeasure.db";
+		/*Variable for Language*/
+		static char language;
 		/*Pointer to the database*/
 		sqlite3 *DB;
 		/*Error message for SQL errors*/
@@ -23,6 +25,18 @@ class Database
 		static int save_callback(void* NotUsed, int num_results, char** values, char** columns);		
 
 	public:
+		Database(char chosen_language) {
+			if (chosen_language == 'NO') {
+				language = chosen_language;
+			}
+			else if (chosen_language == 'EN') {
+				language = chosen_language;
+			}
+			else
+			{
+				std::cout << "ERROR: Language not chosen!" << std::endl;
+			}
+		}
 		/*Opens the database*/
 		int open_database();
 		/*Check if database interaction is succsessfull*/

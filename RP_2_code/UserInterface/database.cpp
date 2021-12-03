@@ -15,9 +15,21 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
 
 int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
 {
+    std::string n; // Name
+    std::string h; // Height
     if (num_results == 2) {
-        std::string n = "Bruker: ";// Resets last name 
-        std::string h = "H�yde : ";// Resets last height
+        if (language == 'EN') {
+            n = "User  : ";
+            h = "Height: ";
+        }
+        else if (language == 'NO') {
+            n = "Bruker: ";
+            h = "H�yde : ";
+
+        }
+        else {
+            std::cout << "ERROR: database/save_callback/language" << std::endl;
+        }
 
         n.append(values[0]);    // eks: "Bruker: username"
         h.append(values[1]);    // eks: "H�yde : 180"
