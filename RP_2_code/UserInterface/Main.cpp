@@ -20,10 +20,6 @@ int main(int argc, char *argv[])
     }
     else std::cout << "ERROR: Main/language choice" << std::endl;
 
-    
-
-    
-    
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
 
