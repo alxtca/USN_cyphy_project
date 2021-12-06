@@ -26,7 +26,6 @@ A file RP2 will then appear in that file path.
 Double click file --> Execute in Terminal
 You can now navigate the console for RP2
 
-
 For (live system) / (local test on windows)
 Go into the following files:
 

@@ -47,6 +47,5 @@ class Database
 		void view_database();
 		/*Deletes the table in database*/
 		void clear_database();
-
 };
 
