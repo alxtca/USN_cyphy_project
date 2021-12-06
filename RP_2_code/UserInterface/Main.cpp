@@ -1,39 +1,19 @@
-#include "language.h"
 #include "database.h"
 #include "take-height-measurement.h"
 #include "read-distance-and-update-xml.h"
+//#include "Coms_NO.h" // For Norwegian language
+#include "Coms_EN.h" // For English language
 
 
 int main(int argc, char *argv[])
 {
-    /*Choose language for human interaction*/
-    std::string language = choose_language();
-    if (language == "EN") {
-        #include "Coms_EN.h"
-        Coms user_comms; // Input / Output / Error Messages
-        Database DB('EN'); // SQL database with output language
-    }
-    else if (language == "NO") {
-        #include "Coms_NO.h"
-        Coms user_comms; // Input / Output / Error Messages
-        Database DB('NO'); // SQL database with output language
-    }
-    else std::cout << "ERROR: Main/language choice" << std::endl;
-
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
-
-   
-    //test data start -------------------
-
-    /*
-    DB.write_user("user1", 180);
-    DB.view_database();
-    */
-
-    //test data slutt -------------------
+    char* l = "EN"; // Language for lcd output
 
 
+    Coms user_comms; // Input / Output / Error Messages
+    Database DB(l); // SQL database with lcd output language
     user_comms.intro();
 
     while (m >= 0) {
@@ -117,7 +97,7 @@ int main(int argc, char *argv[])
 
         }
         else if (m == 3) {// menu for getting exicting user data
-            user_comms.menu_existing();
+            user_comms.menu_excisting();
             um = user_comms.get_menu_int(2);
             if (um == 1) {
                 m = 3;//---loop back to existing menu----

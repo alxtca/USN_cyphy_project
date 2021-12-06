@@ -1,5 +1,5 @@
 #include "database.h"
-
+Database* Database::p_this_db = NULL;
 
 
 
@@ -18,11 +18,11 @@ int Database::save_callback(void* NotUsed, int num_results, char** values, char*
     std::string n; // Name
     std::string h; // Height
     if (num_results == 2) {
-        if (language == 'EN') {
+        if (strcmp(p_this_db->language, "EN")) {
             n = "User  : ";
             h = "Height: ";
         }
-        else if (language == 'NO') {
+        else if (strcmp(p_this_db->language, "NO")) {
             n = "Bruker: ";
             h = "H�yde : ";
 
