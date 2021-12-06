@@ -10,10 +10,11 @@ int main(int argc, char *argv[])
     int um = 0; // User meny choice
     char* l = "EN"; // Language for lcd output
 
-
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
 
+    Coms user_comms; // Input / Output / Error Messages
+    Database DB(l); // SQL database with lcd output language
     user_comms.intro();
 
     while (m >= 0) {
@@ -51,13 +52,9 @@ int main(int argc, char *argv[])
                 m = 2;//----loop back to new user menu---- 
                 um = 0;
                 
-
-
                 //int hight = 0; // dummy for local test
-                std::string user;
-                 
+                std::string user;                 
                 user_comms.ask_for_name();
-
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
@@ -66,7 +63,6 @@ int main(int argc, char *argv[])
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
-
                     // x = check_button(); // checks button
                     if(x==0){ // Button pressed
                         height = takeHeightMeasurement();
@@ -101,15 +97,13 @@ int main(int argc, char *argv[])
         }
         else if (m == 3) {// menu for getting exicting user data
             user_comms.menu_excisting();
-
             um = user_comms.get_menu_int(2);
             if (um == 1) {
                 m = 3;//---loop back to existing menu----
                 um = 0;
 
                 std::string user = "";
-                user_comms.ask_for_name();   
-
+                user_comms.ask_for_name(); 
                 std::cin >> user;
                 DB.read_user(user);
 
@@ -162,7 +156,6 @@ int main(int argc, char *argv[])
                 m = 4;//---loop back to settings menu----
                 um = 0;
                 DB.clear_database(); // Clear data from database
-
             }
             else if (um == 0) {//return to main
                 m = 1;

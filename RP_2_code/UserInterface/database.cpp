@@ -128,6 +128,7 @@ void Database::get_user(void)
     close_database();
 
 }
+
 void Database::close_database()
 {
     int exit = sqlite3_close(DB); //Close the database

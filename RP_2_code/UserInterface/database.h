@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <ctime>
 #include <string>
 //#include "sqlite3/sqlite3.h"  //For windows, // line below
