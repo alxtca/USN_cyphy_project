@@ -1,5 +1,6 @@
 #include "database.h"
-Database* Database::p_this_db = NULL;
+#include "LCD1602/lcd1602.h"
+
 
 
 
@@ -18,11 +19,11 @@ int Database::save_callback(void* NotUsed, int num_results, char** values, char*
     std::string n; // Name
     std::string h; // Height
     if (num_results == 2) {
-        if (strcmp(p_this_db->language, "EN")) {
+        if (language == 'EN') {
             n = "User  : ";
             h = "Height: ";
         }
-        else if (strcmp(p_this_db->language, "NO")) {
+        else if (language == 'NO') {
             n = "Bruker: ";
             h = "H�yde : ";
 
@@ -39,6 +40,32 @@ int Database::save_callback(void* NotUsed, int num_results, char** values, char*
         //------test values--------
         std::cout << std::endl << n << std::endl << h << std::endl << std::endl;
         //------test values--------
+        
+        //------Write to display------
+        int i2c_bus;
+        i2c_bus = lcd1602Init(1,0x27); // parameters: channel, address 
+        
+        if (i2c_bus)
+        {
+            printf("Initialization failed; aborting...\n");
+            return 0;
+        }
+    
+        //Show name: 
+        lcd1602SetCursor(0,0); // default position, character 0, line 0
+        char lineToPrint[n.size() + 1]{};   // prepare a print array
+        n.copy(lineToPrint,n.size() + 1);   // copy name-string to print array
+        lineToPrint[n.size()] = '\0';       // adding stop character
+        lcd1602WriteString(lineToPrint);    // write to top line
+        
+        //Show height:
+        lcd1602SetCursor(0,1); // change line position, character 0, line 1
+        lineToPrint[h.size() + 1]{};     // reset print array
+        n.copy(lineToPrint,h.size() + 1);   // copy height-string to print array
+        lineToPrint[h.size()] = '\0';       // adding stop character
+        lcd1602WriteString(lineToPrint);    // write to bottom line    
+        
+            //------Print to display------
 
     }
     else
@@ -165,4 +192,3 @@ void Database::clear_database()
     close_database();
 
 }
-
