@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <ctime>
 #include <string>
 //#include "sqlite3/sqlite3.h"  //For windows, // line below
@@ -47,6 +46,5 @@ class Database
 		void view_database();
 		/*Deletes the table in database*/
 		void clear_database();
-
 };
 

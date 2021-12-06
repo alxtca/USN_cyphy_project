@@ -4,7 +4,6 @@
 //#include "Coms_NO.h" // For Norwegian language
 #include "Coms_EN.h" // For English language
 
-
 int main(int argc, char *argv[])
 {
     int m = 1; // Meny option holder 
@@ -14,6 +13,7 @@ int main(int argc, char *argv[])
 
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
+
     user_comms.intro();
 
     while (m >= 0) {
@@ -52,10 +52,12 @@ int main(int argc, char *argv[])
                 um = 0;
                 
 
+
                 //int hight = 0; // dummy for local test
                 std::string user;
                  
                 user_comms.ask_for_name();
+
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
@@ -64,6 +66,7 @@ int main(int argc, char *argv[])
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
+
                     // x = check_button(); // checks button
                     if(x==0){ // Button pressed
                         height = takeHeightMeasurement();
@@ -98,6 +101,7 @@ int main(int argc, char *argv[])
         }
         else if (m == 3) {// menu for getting exicting user data
             user_comms.menu_excisting();
+
             um = user_comms.get_menu_int(2);
             if (um == 1) {
                 m = 3;//---loop back to existing menu----
@@ -105,6 +109,7 @@ int main(int argc, char *argv[])
 
                 std::string user = "";
                 user_comms.ask_for_name();   
+
                 std::cin >> user;
                 DB.read_user(user);
 
@@ -129,7 +134,6 @@ int main(int argc, char *argv[])
         }
          else if (m == 4) {// menu for system settings
             user_comms.menu_settings();
-
             um = user_comms.get_menu_int(3);
 
             if (um == 1) { // Read XMl file and save system values
@@ -158,6 +162,7 @@ int main(int argc, char *argv[])
                 m = 4;//---loop back to settings menu----
                 um = 0;
                 DB.clear_database(); // Clear data from database
+
             }
             else if (um == 0) {//return to main
                 m = 1;
@@ -174,7 +179,6 @@ int main(int argc, char *argv[])
         }
         else if (m == 0) {// exit programm
             user_comms.end();
-          
             m = -1;
         }
         else {// Error, m out of range
