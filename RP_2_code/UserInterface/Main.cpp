@@ -4,13 +4,14 @@
 //#include "Coms_NO.h" // For Norwegian language
 #include "Coms_EN.h" // For English language
 
-
 int main(int argc, char *argv[])
 {
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
     char* l = "EN"; // Language for lcd output
 
+    Coms user_comms; // Input / Output / Error Messages
+    Database DB(l); // SQL database with lcd output language
 
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
@@ -51,10 +52,8 @@ int main(int argc, char *argv[])
                 m = 2;//----loop back to new user menu---- 
                 um = 0;
                 
-
                 //int hight = 0; // dummy for local test
-                std::string user;
-                 
+                std::string user;                 
                 user_comms.ask_for_name();
                 std::cin >>user;
                 
@@ -104,7 +103,7 @@ int main(int argc, char *argv[])
                 um = 0;
 
                 std::string user = "";
-                user_comms.ask_for_name();   
+                user_comms.ask_for_name(); 
                 std::cin >> user;
                 DB.read_user(user);
 
@@ -129,7 +128,6 @@ int main(int argc, char *argv[])
         }
          else if (m == 4) {// menu for system settings
             user_comms.menu_settings();
-
             um = user_comms.get_menu_int(3);
 
             if (um == 1) { // Read XMl file and save system values
@@ -174,7 +172,6 @@ int main(int argc, char *argv[])
         }
         else if (m == 0) {// exit programm
             user_comms.end();
-          
             m = -1;
         }
         else {// Error, m out of range

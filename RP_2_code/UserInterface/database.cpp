@@ -74,7 +74,6 @@ void Database::create_table()
     if (!exit) { //Database opened succsessfully
         /*SQL statment for table creation*/
         exit = sqlite3_exec(DB, "CREATE TABLE USER(" \
-
             "ID INTEGER PRIMARY KEY AUTOINCREMENT,"\
             "NAME TEXT NOT NULL,"\
             "HEIGHT INT NOTT NULL,"\
@@ -114,7 +113,6 @@ void Database::read_user(std::string name)
     close_database();
 }
 
-
 void Database::get_user(void)
 {
     int exit = open_database();
@@ -146,7 +144,6 @@ void Database::view_database()
         std::cout <<"View Database "<<std::endl;
         /*SQL statment for printing all users in table*/
         sqlite3_exec(DB, "SELECT NAME,HEIGHT FROM USER", callback, 0, &error_message);
-
     }
     close_database();
 }
@@ -161,7 +158,6 @@ void Database::clear_database()
         test_open(exit, "Table removed successfully");
     }
     close_database();
-
 }
 
 void Database::send_to_lcd()
