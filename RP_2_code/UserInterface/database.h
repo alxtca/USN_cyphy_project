@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <string>
+#include <string.h>
 //#include "sqlite3/sqlite3.h"  //For windows, // line below
 # include <sqlite3.h> //For Linux, // line above
 //#include "LCD1602/lcd1602.h" // lcd library
