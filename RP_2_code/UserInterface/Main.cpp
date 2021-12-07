@@ -75,11 +75,9 @@ int main(int argc, char *argv[])
                // DB.write_user(user, hight); // For local test
                 DB.write_user(user, height);
                 user = ""; // Reset user name
-                // --------------------------TO DO, ADD LCD screen---------------------------------------
 
                 DB.get_user(); // returns string vector with name and height
-
-                // --------------------------TO DO, ADD LCD screen---------------------------------------
+                DB.send_to_lcd();
 
             }
             else if (um == 0) {//return to main
