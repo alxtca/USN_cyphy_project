@@ -160,31 +160,30 @@ void Database::clear_database()
     close_database();
 }
 
-void Database::send_to_lcd()
+void Database::send_to_lcd() // Write to lcd code
 {
-    /* // Write to lcd code
     int i2c_bus;
     i2c_bus = lcd1602Init(1, 0x27); // parameters: channel, address 
 
     if (i2c_bus)
     {
         printf("Initialization failed; aborting...\n");
+        printf("IS i2c com open on device?\n")
         return 0;
     }
 
     //Show name: 
     lcd1602SetCursor(0, 0); // default position, character 0, line 0
-    char lineToPrint[n.size() + 1]{};   // prepare a print array
-    n.copy(lineToPrint, n.size() + 1);   // copy name-string to print array
-    lineToPrint[n.size()] = '\0';       // adding stop character
+    char line1ToPrint[name.size() + 1]{};   // prepare a print array
+    name.copy(lineToPrint, name.size() + 1);   // copy name-string to print array
+    lineToPrint[name.size()] = '\0';       // adding stop character
     lcd1602WriteString(lineToPrint);    // write to top line
 
     //Show height:
     lcd1602SetCursor(0, 1); // change line position, character 0, line 1
-    lineToPrint[h.size() + 1]{};     // reset print array
-    n.copy(lineToPrint, h.size() + 1);   // copy height-string to print array
-    lineToPrint[h.size()] = '\0';       // adding stop character
+    char line2ToPrint[height.size() + 1]{};     // reset print array
+    height.copy(lineToPrint, height.size() + 1);   // copy height-string to print array
+    lineToPrint[height.size()] = '\0';       // adding stop character
     lcd1602WriteString(lineToPrint);    // write to bottom line    
-    */
 }
 
