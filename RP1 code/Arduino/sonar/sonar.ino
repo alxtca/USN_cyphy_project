@@ -44,32 +44,32 @@ void loop() {
 
 
 void buzzDown(){
-  int interval{850};
-  float multiplier{0.8};
+  int interval{900};
+  float multiplier{0.7};
   unsigned int frequency{440}; // 440 Hz A4
-  for(int i{0}; i < 2; i++){
+  for(int i{0}; i < 3; i++){
     buzz.tone(frequency/2);
-    delay(150);
+    delay(100);
     buzz.noTone();
-    delay(850);
+    delay(900);
   }
- 
+  //delay(50);
   for(int i{0}; i < 8; i++){
     buzz.tone(frequency/2); //parameter: frequency
-    delay(150*multiplier);
+    delay(100*multiplier);
     buzz.noTone();
     interval *= multiplier; //decrease interval
     delay(interval);
     
   }
   
-  for(int i {}; i < 4; i++){
+  for(int i {}; i < 8; i++){
     buzz.tone(frequency/2); //parameter: frequency
-    delay(150*multiplier);
+    delay(50);
     buzz.noTone();
     delay(interval);
   }
-  
+  delay(50);
   buzz.tone(2 * frequency); // 880 Hz A5
   delay(750);
   buzz.noTone(); 
