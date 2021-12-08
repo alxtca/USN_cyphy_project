@@ -47,6 +47,7 @@ int readDistanceAndUpdateXml() {
     int distance = sendRequest(request_message); // For live system, // the line below
     //int distance = 200; // For local test, // the line above
 
+
     if (distance == 10000) {
         std::cout << "bad request" << std::endl;
         return 0;
@@ -60,6 +61,7 @@ int readDistanceAndUpdateXml() {
         std::cout << "Height to sensor saved: " << distance << std::endl;
     } 
     else {
+
         std::cout << "something went wrong " << std::endl;
     }
 

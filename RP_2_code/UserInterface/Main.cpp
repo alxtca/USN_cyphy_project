@@ -5,12 +5,13 @@
 #include "Coms_EN.h" // For English language
 #include "button.h"
 
+
 int main(int argc, char *argv[])
 {
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
     char* l = "EN"; // Language for lcd output
-   
+  
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
     Button button; // Code related to button
@@ -74,6 +75,11 @@ int main(int argc, char *argv[])
                // DB.write_user(user, hight); // For local test
                 DB.write_user(user, height);
                 user = ""; // Reset user name
+                // --------------------------TO DO, ADD LCD screen---------------------------------------
+
+                DB.get_user(); // returns string vector with name and height
+
+                // --------------------------TO DO, ADD LCD screen---------------------------------------
 
                 DB.get_user(); // returns string vector with name and height
                 DB.send_to_lcd();
