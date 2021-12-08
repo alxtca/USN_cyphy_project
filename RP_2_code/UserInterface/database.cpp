@@ -161,7 +161,7 @@ void Database::clear_database()
 }
 
 void Database::send_to_lcd() // Write to lcd code
-{
+    /*// Write to lcd code
     int i2c_bus;
     i2c_bus = lcd1602Init(1, 0x27); // parameters: channel, address 
 
@@ -169,6 +169,7 @@ void Database::send_to_lcd() // Write to lcd code
     {
         printf("Initialization failed; aborting...\n");
         printf("IS i2c com open on device?\n")
+
         return 0;
     }
 
@@ -177,6 +178,7 @@ void Database::send_to_lcd() // Write to lcd code
     char line1ToPrint[name.size() + 1]{};   // prepare a print array
     name.copy(lineToPrint, name.size() + 1);   // copy name-string to print array
     lineToPrint[name.size()] = '\0';       // adding stop character
+
     lcd1602WriteString(lineToPrint);    // write to top line
 
     //Show height:
@@ -185,5 +187,6 @@ void Database::send_to_lcd() // Write to lcd code
     height.copy(lineToPrint, height.size() + 1);   // copy height-string to print array
     lineToPrint[height.size()] = '\0';       // adding stop character
     lcd1602WriteString(lineToPrint);    // write to bottom line    
+    */
 }
 
