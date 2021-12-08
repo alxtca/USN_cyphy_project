@@ -105,4 +105,3 @@ void find_average(){
 
   digitalWrite(LED_pin, LOW); //LED off, when measurement sent
 }
-}
