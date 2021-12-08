@@ -3,17 +3,19 @@
 #include "read-distance-and-update-xml.h"
 //#include "Coms_NO.h" // For Norwegian language
 #include "Coms_EN.h" // For English language
+#include "button.h"
+
 
 int main(int argc, char *argv[])
 {
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
     char* l = "EN"; // Language for lcd output
-
-
+  
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
-
+    Button button; // Code related to button
+    button.setup(); 
     user_comms.intro();
 
     while (m >= 0) {
@@ -51,27 +53,21 @@ int main(int argc, char *argv[])
                 m = 2;//----loop back to new user menu---- 
                 um = 0;
                 
-
-
                 //int hight = 0; // dummy for local test
-                std::string user;
-                 
+                std::string user;                 
                 user_comms.ask_for_name();
-
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
-                int x = 0; // For if button pressed
                 int height;
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
-
                     // x = check_button(); // checks button
-                    if(x==0){ // Button pressed
+                    if(button.button_pushed==true){ // Button pressed
+                        button.do_something();
                         height = takeHeightMeasurement();
                         z = 1; // Breaks loop
-                        x = 1; // Stopps if
                     }
                 }
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
@@ -84,6 +80,9 @@ int main(int argc, char *argv[])
                 DB.get_user(); // returns string vector with name and height
 
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
+
+                DB.get_user(); // returns string vector with name and height
+                DB.send_to_lcd();
 
             }
             else if (um == 0) {//return to main
@@ -101,15 +100,13 @@ int main(int argc, char *argv[])
         }
         else if (m == 3) {// menu for getting exicting user data
             user_comms.menu_excisting();
-
             um = user_comms.get_menu_int(2);
             if (um == 1) {
                 m = 3;//---loop back to existing menu----
                 um = 0;
 
                 std::string user = "";
-                user_comms.ask_for_name();   
-
+                user_comms.ask_for_name(); 
                 std::cin >> user;
                 DB.read_user(user);
 
@@ -162,7 +159,6 @@ int main(int argc, char *argv[])
                 m = 4;//---loop back to settings menu----
                 um = 0;
                 DB.clear_database(); // Clear data from database
-
             }
             else if (um == 0) {//return to main
                 m = 1;

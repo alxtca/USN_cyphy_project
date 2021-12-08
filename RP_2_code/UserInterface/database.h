@@ -1,8 +1,11 @@
 #include <iostream>
+#include <vector>
 #include <ctime>
-#include <string>
+#include <string.h>
 //#include "sqlite3/sqlite3.h"  //For windows, // line below
 # include <sqlite3.h> //For Linux, // line above
+//#include "LCD1602/lcd1602.h" // lcd library
+
 
 class Database
 {
@@ -18,6 +21,9 @@ class Database
 		char *error_message = 0;
 		/*pointer to this class/db*/
 		static Database* p_this_db;
+    /*Temp values to hold data for lcd*/
+		std::string name, height;
+
 		/*Used in sqlite3_exec*/
 		static int callback(void* NotUsed, int num_results, char** values, char** columns);
 		/*Used in sqlite3_exec(SELECT) for saving retuned values */
@@ -46,5 +52,8 @@ class Database
 		void view_database();
 		/*Deletes the table in database*/
 		void clear_database();
+		/*Send temp data to lcd*/
+		void send_to_lcd();
+
 };
 
