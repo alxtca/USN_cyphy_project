@@ -1,5 +1,6 @@
 #include "database.h"
-Database* Database::p_this_db = NULL;
+#include "LCD1602/lcd1602.h"
+
 
 
 
@@ -15,28 +16,56 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
 
 int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
 {
+    std::string n; // Name
+    std::string h; // Height
     if (num_results == 2) {
-        if (strcmp(p_this_db->language, "EN")) {
-            p_this_db->name = "User  : ";
-            p_this_db->height = "Height: ";
+        if (language == 'EN') {
+            n = "User  : ";
+            h = "Height: ";
         }
-        else if (strcmp(p_this_db->language, "NO")) {
-            p_this_db->name = "Bruker: ";
-            p_this_db->height = "H�yde : ";
+        else if (language == 'NO') {
+            n = "Bruker: ";
+            h = "H�yde : ";
 
         }
         else {
             std::cout << "ERROR: database/save_callback/language" << std::endl;
         }
 
-        p_this_db->name.append(values[0]);    // eks: "Bruker: username"
-        p_this_db->height.append(values[1]);    // eks: "H�yde : 180"
+        n.append(values[0]);    // eks: "Bruker: username"
+        h.append(values[1]);    // eks: "H�yde : 180"
 
-        p_this_db->height.append(" cm");        // eks: "H�yde : 180 cm"
+        h.append(" cm");        // eks: "H�yde : 180 cm"
 
-        //------test of values--------
-        std::cout << std::endl << p_this_db->name << std::endl << p_this_db->height << std::endl << std::endl;
-        //------test of values--------
+        //------test values--------
+        std::cout << std::endl << n << std::endl << h << std::endl << std::endl;
+        //------test values--------
+        
+        //------Write to display------
+        int i2c_bus;
+        i2c_bus = lcd1602Init(1,0x27); // parameters: channel, address 
+        
+        if (i2c_bus)
+        {
+            printf("Initialization failed; aborting...\n");
+            return 0;
+        }
+    
+        //Show name: 
+        lcd1602SetCursor(0,0); // default position, character 0, line 0
+        char lineToPrint[n.size() + 1]{};   // prepare a print array
+        n.copy(lineToPrint,n.size() + 1);   // copy name-string to print array
+        lineToPrint[n.size()] = '\0';       // adding stop character
+        lcd1602WriteString(lineToPrint);    // write to top line
+        
+        //Show height:
+        lcd1602SetCursor(0,1); // change line position, character 0, line 1
+        lineToPrint[h.size() + 1]{};     // reset print array
+        n.copy(lineToPrint,h.size() + 1);   // copy height-string to print array
+        lineToPrint[h.size()] = '\0';       // adding stop character
+        lcd1602WriteString(lineToPrint);    // write to bottom line    
+        
+            //------Print to display------
 
     }
     else
@@ -74,6 +103,7 @@ void Database::create_table()
     if (!exit) { //Database opened succsessfully
         /*SQL statment for table creation*/
         exit = sqlite3_exec(DB, "CREATE TABLE USER(" \
+
             "ID INTEGER PRIMARY KEY AUTOINCREMENT,"\
             "NAME TEXT NOT NULL,"\
             "HEIGHT INT NOTT NULL,"\
@@ -113,6 +143,7 @@ void Database::read_user(std::string name)
     close_database();
 }
 
+
 void Database::get_user(void)
 {
     int exit = open_database();
@@ -144,6 +175,7 @@ void Database::view_database()
         std::cout <<"View Database "<<std::endl;
         /*SQL statment for printing all users in table*/
         sqlite3_exec(DB, "SELECT NAME,HEIGHT FROM USER", callback, 0, &error_message);
+
     }
     close_database();
 }
@@ -158,35 +190,5 @@ void Database::clear_database()
         test_open(exit, "Table removed successfully");
     }
     close_database();
+
 }
-
-void Database::send_to_lcd() // Write to lcd code
-    /*// Write to lcd code
-    int i2c_bus;
-    i2c_bus = lcd1602Init(1, 0x27); // parameters: channel, address 
-
-    if (i2c_bus)
-    {
-        printf("Initialization failed; aborting...\n");
-        printf("IS i2c com open on device?\n")
-
-        return 0;
-    }
-
-    //Show name: 
-    lcd1602SetCursor(0, 0); // default position, character 0, line 0
-    char line1ToPrint[name.size() + 1]{};   // prepare a print array
-    name.copy(lineToPrint, name.size() + 1);   // copy name-string to print array
-    lineToPrint[name.size()] = '\0';       // adding stop character
-
-    lcd1602WriteString(lineToPrint);    // write to top line
-
-    //Show height:
-    lcd1602SetCursor(0, 1); // change line position, character 0, line 1
-    char line2ToPrint[height.size() + 1]{};     // reset print array
-    height.copy(lineToPrint, height.size() + 1);   // copy height-string to print array
-    lineToPrint[height.size()] = '\0';       // adding stop character
-    lcd1602WriteString(lineToPrint);    // write to bottom line    
-    */
-}
-

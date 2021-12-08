@@ -1,4 +1,4 @@
-#include "Coms.h"
+#include "Coms_NO.h"
 
 void Coms::intro()
 {
@@ -21,7 +21,7 @@ void Coms::menu_new()
 		<< "0 : Tilbake" << std::endl;
 }
 
-void Coms::menu_existing()
+void Coms::menu_excisting()
 {
 	std::cout << "Eksterende måling:" << std::endl
 		<< "1 : Søk etter måling" << std::endl
@@ -34,8 +34,8 @@ void Coms::menu_settings()
 	std::cout << "Instillinger:" << std::endl
 		<< "1 : Start Oppsett" << std::endl
 		<< "2 : Nullstill høyde måler" << std::endl
+		<< "3 : Slett database tabell" << std::endl
 		<< "0 : Tilbake" << std::endl;
-
 }
 
 void Coms::end()
@@ -67,6 +67,9 @@ int Coms::get_menu_int(int options)//Ask for int within range 0 <= input <= opti
 	}
 	wrong_input();
 	return -1;
+}
 
-
+void Coms::ask_for_name()
+{
+	std::cout << "Ditt navn: ";
 }
