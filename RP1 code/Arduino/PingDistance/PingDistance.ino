@@ -1,10 +1,12 @@
 /* ---------------------------------------------------------------------------
-* This code waits for signal from RP1 to begin measurements. When signal is received, 
-* LED is lit and arduino takes 20 samples with HC-RS04 ultrasonic sonar.
-* When sampling complete, it calculates the average and prints it to Serial, to be received back by
-* RP1. LED turns off.
+* This code waits for signal from RP1 to begin measurements. When signal is received, buzzer  
+* will beep to indicate it's time to get in position. Measurements start when the high pitch ends. 
+* Led turns on, and arduino takes 20 samples with HC-RS04 ultrasonic sonar.
+* When sampling complete, it calculates the average and send it back to Serial. LED turns off.
 * 
-* Includes NewPing.h by...
+* Includes NewPing.h by Tim Eckel https://www.arduino.cc/reference/en/libraries/newping/
+* and TonePlayer by Nick Gammon https://forum.arduino.cc/t/newping-tone-conflict/179755/4 (Because
+* arduino native tone() is in conflict with NewPing, both "compete" for timer2)
 * ---------------------------------------------------------------------------
 */
 
