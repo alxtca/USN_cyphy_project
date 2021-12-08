@@ -53,10 +53,13 @@ int readDistanceAndUpdateXml() {
     }
     else {
         std::cout << "Height to sensor is: " << distance << std::endl;
-    //store sensor position in tag "sensor" in file data.txt 
+        //store sensor position in tag "sensor" in file data.txt 
+    }
+
     if (storeHeightInXML(distance)){
         std::cout << "Height to sensor saved: " << distance << std::endl;
-    } else {
+    } 
+    else {
         std::cout << "something went wrong " << std::endl;
     }
 

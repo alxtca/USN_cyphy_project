@@ -3,18 +3,18 @@
 #include "read-distance-and-update-xml.h"
 //#include "Coms_NO.h" // For Norwegian language
 #include "Coms_EN.h" // For English language
+#include "button.h"
 
 int main(int argc, char *argv[])
 {
     int m = 1; // Meny option holder 
     int um = 0; // User meny choice
     char* l = "EN"; // Language for lcd output
-
+   
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
-
-    Coms user_comms; // Input / Output / Error Messages
-    Database DB(l); // SQL database with lcd output language
+    Button button; // Code related to button
+    button.setup(); 
     user_comms.intro();
 
     while (m >= 0) {
@@ -58,16 +58,15 @@ int main(int argc, char *argv[])
                 std::cin >>user;
                 
                 int z = 0; // For loop, waiting on button
-                int x = 0; // For if button pressed
                 int height;
       
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
                 while(z==0){ // While button not pressed
                     // x = check_button(); // checks button
-                    if(x==0){ // Button pressed
+                    if(button.button_pushed==true){ // Button pressed
+                        button.do_something();
                         height = takeHeightMeasurement();
                         z = 1; // Breaks loop
-                        x = 1; // Stopps if
                     }
                 }
                 // --------------------------TO DO, ADD BUTTON---------------------------------------
