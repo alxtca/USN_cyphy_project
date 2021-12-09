@@ -3,6 +3,7 @@
 void Button::button_interrupt()
 {
 	/*
+
 	if (millis() >= last_interrupt + debounce_time) {
 		last_interrupt = millis(); //update last_interrupt time
 		button_pushed = true;
@@ -14,7 +15,7 @@ void Button::do_something()
 {
 	//change current LED state
 	//digitalWrite(LED_pin, !digitalRead(LED_pin));
-}
+
 
 void Button::setup()
 {
@@ -27,4 +28,5 @@ void Button::setup()
 	wiringPiISR(button_pin, INT_EDGE_RISING, &button_interrupt);
 	//Parameters: int wiringPiISR (int pin, int edgeType,  void (*function)(void))
 	*/
+
 }

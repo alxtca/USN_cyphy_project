@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
                 DB.print_to_lcd(); // returns string vector with name and height
-                DB.send_to_lcd();
+
 
             }
             else if (um == 0) {//return to main

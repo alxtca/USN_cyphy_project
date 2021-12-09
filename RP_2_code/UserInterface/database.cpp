@@ -16,7 +16,7 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
 int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
 {
     if (num_results == 2) {
-
+      
         p_this_db->name = values[0]; // name
         p_this_db->height = values[1]; // height
 
@@ -169,6 +169,7 @@ void Database::print_to_lcd()
     p_height = "";
 
 }
+
 void Database::close_database()
 {
     int exit = sqlite3_close(DB); //Close the database
@@ -201,7 +202,6 @@ void Database::clear_database()
     }
     close_database();
 }
-
 
 
 bool Database::check_user_name(std::string n)
@@ -248,5 +248,6 @@ int Database::return_user_height(std::string name)
     close_database();
     
     return std::stoi(height);
+
 }
 

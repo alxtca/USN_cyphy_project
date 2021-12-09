@@ -66,6 +66,5 @@ class Database
 		/*Return height of user with name name*/
 		int return_user_height(std::string name);
 
-
 };
 
