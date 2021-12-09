@@ -1,5 +1,5 @@
 //see example below main()
-// For local test add /* before this comment and see bottom of code.
+/*// For local test add /* before this comment and see bottom of code.
 #include<stdio.h>
 #include<string.h>	//strlen
 #include<sys/socket.h>
@@ -48,7 +48,7 @@ int sendRequest(char * msg){
 
 	return height;
 }
-// For local test add */ before this comment
+// For local test add */ // before this comment
 
 
 /*

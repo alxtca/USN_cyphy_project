@@ -77,11 +77,11 @@ int main(int argc, char *argv[])
                 user = ""; // Reset user name
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
-                DB.get_user(); // returns string vector with name and height
+                DB.get_last_user(); // returns string vector with name and height
 
                 // --------------------------TO DO, ADD LCD screen---------------------------------------
 
-                DB.get_user(); // returns string vector with name and height
+                DB.print_to_lcd(); // returns string vector with name and height
                 DB.send_to_lcd();
 
             }

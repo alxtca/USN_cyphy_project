@@ -1,5 +1,5 @@
 #include <iostream>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 
 
 class Button //setup and action related to button
