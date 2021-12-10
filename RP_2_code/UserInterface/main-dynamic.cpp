@@ -149,13 +149,15 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       std::string result3 = render("{% include \"html/result.html\" %}", data);
       mg_http_reply(c, 200, NULL, result3.c_str());
 
-      //store values to DB       ////////////////////////REPLACE HERE
+      //store values to DB
+      Database DB("EN");
+      if (check_user_name(buf)){ //hvis finnes ikke lag ny bruker
+        DB.write_user(buf2, height);
+      }
+      else { //ellers oppdater eksisterende
+        DB.update_user_height(buf2, height);
+      }
 
-      //Database DB;
-      //DB.create_table(); 
-      //DB.write_user(buf2, height);
-
-      /// OR if user exist in DB, update height for that user (is needed? or will above do the job?)
     }
 //-------------------- UPDATE EXISTING USER HEIGHT ------------------
     else if (mg_http_match_uri(hm, "/update_existing_user_form")) {
