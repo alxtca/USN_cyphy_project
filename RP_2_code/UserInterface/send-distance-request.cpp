@@ -1,5 +1,6 @@
 //see example below main()
 // For local test add /* before this comment and see bottom of code.
+
 #include<stdio.h>
 #include<string.h>	//strlen
 #include<sys/socket.h>
@@ -19,7 +20,7 @@ int sendRequest(char * msg){
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 	if (socket_desc == -1) printf("Could not create socket");
 		
-	server.sin_addr.s_addr = inet_addr("127.0.0.1"); //replace with server IP. $hostname -I
+	server.sin_addr.s_addr = inet_addr("192.168.0.12"); //replace with server IP. $hostname -I
 	server.sin_family = AF_INET;
 	server.sin_port = htons(8888);
 
@@ -48,7 +49,7 @@ int sendRequest(char * msg){
 
 	return height;
 }
-// For local test add */ before this comment
+// For local test add */ //before this comment
 
 
 /*
