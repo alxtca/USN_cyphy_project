@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <string> // For windows
-//#include <string.h> for Linux
-#include "sqlite3/sqlite3.h"  //For windows, // line below
-//# include <sqlite3.h> //For Linux, // line above
-//#include "LCD1602/lcd1602.h" // lcd library
+//#include <string> // For windows
+#include <string.h> for Linux
+//#include "sqlite3/sqlite3.h"  //For windows, // line below
+# include <sqlite3.h> //For Linux, // line above
+#include "lcd1602.h" // lcd library
 
 
 class Database
@@ -37,6 +37,7 @@ class Database
 		/*Check if database interaction is succsessfull*/
 		void test_open(int exit, std::string success_message);
 
+
 	public:
 		Database(char* chosen_language) {
 			p_this_db = this;
@@ -60,11 +61,13 @@ class Database
 		/*Deletes the table in database*/
 		void clear_database();
 		/*Return true if user name in use*/
-		bool check_user_name(std::string name);
+		bool used_user_name(std::string name);
 		/*Update height h user with name name*/
 		bool update_user_height(std::string name,int h);
 		/*Return height of user with name name*/
 		int return_user_height(std::string name);
+		static int callback_checkUserExist(void* NotUsed, int args, char** argv, char** azColName);
+		bool checkUserExist(std::string user_n);
+		bool user_exist;
 
 };
-
