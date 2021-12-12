@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <string.h>
+//#include <string> // For windows
+#include <string.h> for Linux
 //#include "sqlite3/sqlite3.h"  //For windows, // line below
 # include <sqlite3.h> //For Linux, // line above
-//#include "LCD1602/lcd1602.h" // lcd library
+#include "lcd1602.h" // lcd library
+
 
 class Database
 {
@@ -21,21 +23,27 @@ class Database
 		/*pointer to this class/db*/
 		static Database* p_this_db;
 		/*Temp values to hold data for lcd*/
+		std::string p_name, p_height;
+		/*Temp user data*/
 		std::string name, height;
 		/*Used in sqlite3_exec*/
 		static int callback(void* NotUsed, int num_results, char** values, char** columns);
 		/*Used in sqlite3_exec(SELECT) for saving retuned values */
-		static int save_callback(void* NotUsed, int num_results, char** values, char** columns);		
+		static int save_callback(void* NotUsed, int num_results, char** values, char** columns);
+		/*Send temp data to lcd*/
+		void send_to_lcd();
+		/*Opens the database*/
+		int open_database();
+		/*Check if database interaction is succsessfull*/
+		void test_open(int exit, std::string success_message);
+
 
 	public:
 		Database(char* chosen_language) {
 			p_this_db = this;
 			p_this_db->language = chosen_language;
 		}
-		/*Opens the database*/
-		int open_database();
-		/*Check if database interaction is succsessfull*/
-		void test_open(int exit, std::string success_message);
+
 		/*Create a table in database*/
 		void create_table();
 		/*Insert a new user into database*/
@@ -43,15 +51,23 @@ class Database
 		/*Finds if User with name (Name), if so, prints*/
 		void read_user(std::string name);
 		/*Finds lased saved user and saves data locally*/
-		void get_user(void);
+		void get_last_user(void);
+		/*Print to lcd*/
+		void print_to_lcd();
 		/*Closes the database*/
 		void close_database();
 		/*Se all of database content*/
 		void view_database();
 		/*Deletes the table in database*/
 		void clear_database();
-		/*Send temp data to lcd*/
-		void send_to_lcd();
+		/*Return true if user name in use*/
+		bool used_user_name(std::string name);
+		/*Update height h user with name name*/
+		bool update_user_height(std::string name,int h);
+		/*Return height of user with name name*/
+		int return_user_height(std::string name);
+		static int callback_checkUserExist(void* NotUsed, int args, char** argv, char** azColName);
+		bool checkUserExist(std::string user_n);
+		bool user_exist;
 
 };
-
