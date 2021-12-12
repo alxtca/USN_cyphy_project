@@ -13,12 +13,37 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
     return 0;
 }
 
+int Database::callback_checkUserExist(void* NotUsed, int args, char** argv, char** azColName){
+    if(argv > 0){
+        p_this_db->user_exist = true;
+    }
+    else p_this_db->user_exist = false;
+
+    return 0;
+}
+
+bool Database::checkUserExist(std::string user_n) {
+    char* errMsg;
+    int exit = open_database();
+    if (!exit) {//Database opened succsessfully
+        std::string sql = "SELECT * FROM USER WHERE NAME = '"+user_n+"'";
+        int rc = sqlite3_exec(DB, sql.c_str(), callback_checkUserExist, NULL, &errMsg);
+        if (rc != SQLITE_OK){
+            std::cout << "select error" << errMsg<< std::endl;
+        }
+    }
+    close_database();
+    return p_this_db->user_exist;
+
+}
+
 int Database::save_callback(void* NotUsed, int num_results, char** values, char** columns)
 {
-    if (num_results == 2) {
+    if (num_results == 2 ) {
       
         p_this_db->name = values[0]; // name
         p_this_db->height = values[1]; // height
+        std::cout << "name " << p_this_db->name << " height " << p_this_db->height << std::endl;
 
     }
     else
@@ -32,33 +57,27 @@ int Database::save_callback(void* NotUsed, int num_results, char** values, char*
 }
 
 void Database::send_to_lcd() { // Write to lcd code
-    /*// Write to lcd code
+    // Write to lcd code
     int i2c_bus;
     i2c_bus = lcd1602Init(1, 0x27); // parameters: channel, address
-
     if (i2c_bus)
     {
         printf("Initialization failed; aborting...\n");
         printf("IS i2c com open on device?\n");
-
-        return 0;
     }
-
     //Show name:
     lcd1602SetCursor(0, 0); // default position, character 0, line 0
-    char line1ToPrint[name.size() + 1]{};   // prepare a print array
-    name.copy(lineToPrint, name.size() + 1);   // copy name-string to print array
-    lineToPrint[name.size()] = '\0';       // adding stop character
-
-    lcd1602WriteString(lineToPrint);    // write to top line
-
+    char line1ToPrint[p_name.size() + 1]{};   // prepare a print array
+    p_name.copy(line1ToPrint, p_name.size() + 1);   // copy name-string to print array
+    line1ToPrint[p_name.size()] = '\0';       // adding stop character
+    lcd1602WriteString(line1ToPrint);    // write to top line
     //Show height:
     lcd1602SetCursor(0, 1); // change line position, character 0, line 1
-    char line2ToPrint[height.size() + 1]{};     // reset print array
-    height.copy(lineToPrint, height.size() + 1);   // copy height-string to print array
-    lineToPrint[height.size()] = '\0';       // adding stop character
-    lcd1602WriteString(lineToPrint);    // write to bottom line
-   */
+    char line2ToPrint[p_height.size() + 1]{};     // reset print array
+    p_height.copy(line2ToPrint, p_height.size() + 1);   // copy height-string to print array
+    line2ToPrint[p_height.size()] = '\0';       // adding stop character
+    lcd1602WriteString(line2ToPrint);    // write to bottom line
+   
 }
 
 int Database::open_database()
@@ -143,11 +162,11 @@ void Database::get_last_user(void)
 
 void Database::print_to_lcd()
 {
-    if (strcmp(language, "EN")) {
+    if (strcmp(language, "EN")==0) {
         p_name = "User  : ";
         p_height = "Height: ";
     }
-    else if (strcmp(language, "NO")) {
+    else if (strcmp(language, "NO")==0) {
         p_name = "Bruker: ";
         p_height = "H�yde : ";
 
@@ -204,7 +223,7 @@ void Database::clear_database()
 }
 
 
-bool Database::check_user_name(std::string n)
+bool Database::used_user_name(std::string n)
 {
     int exit = open_database();
     if (!exit) {//Database opened succsessfully
@@ -216,9 +235,9 @@ bool Database::check_user_name(std::string n)
     }
     close_database();
     if (strcmp(name.c_str(),"" ) == 0) {
-        return true;
+        return false;
     }
-    else return false;
+    else return true;
 }
 
 bool Database::update_user_height(std::string n,int h)
@@ -226,9 +245,9 @@ bool Database::update_user_height(std::string n,int h)
     int exit = open_database();
     if (!exit) {//Database opened succsessfully
         /*Create string for sql Query*/
-        //  std::string sql = { "UPDATE USER set HEIGHT = " + h + " WHERE NAME ='" + n + "'" }; //----- sql line error-------
+        std::string sql = { "UPDATE USER set HEIGHT = " + std::to_string(h) + " WHERE NAME ='" + n + "'" };
         /*SQL statment for finding user in table*/
-       // exit = sqlite3_exec(DB, sql.c_str(), callback, 0, &error_message);
+        exit = sqlite3_exec(DB, sql.c_str(), callback, 0, &error_message);
         test_open(exit, "Update user successfully");
     }
     close_database();
@@ -250,4 +269,3 @@ int Database::return_user_height(std::string name)
     return std::stoi(height);
 
 }
-
