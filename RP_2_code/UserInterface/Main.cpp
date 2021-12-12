@@ -12,9 +12,6 @@ int main(int argc, char *argv[])
 
     Coms user_comms; // Input / Output / Error Messages
     Database DB(l); // SQL database with lcd output language
-
-    Coms user_comms; // Input / Output / Error Messages
-    Database DB(l); // SQL database with lcd output language
     user_comms.intro();
 
     while (m >= 0) {
@@ -76,8 +73,8 @@ int main(int argc, char *argv[])
                 DB.write_user(user, height);
                 user = ""; // Reset user name
 
-                DB.get_user(); // returns string vector with name and height
-                DB.send_to_lcd();
+                DB.get_last_user(); // returns string vector with name and height
+                DB.print_to_lcd();
 
             }
             else if (um == 0) {//return to main

@@ -10,7 +10,8 @@
 #include "take-height-measurement.h"
 #include "read-distance-and-update-xml.h"
 #include "Coms_EN.h" // For English language
-#include "button.h"
+//#include "button.h"
+
 
 
 // Just for convenience
@@ -105,7 +106,7 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 
       //check in database //dbCheck to return false if user not found in DB
       Database DB("EN");
-      bool user_in_db = DB.check_user_name(buf);
+      bool user_in_db = DB.checkUserExist(buf);
       //bool user_in_db = false; // dummy for testing
 
       if (user_in_db == false) { //if user does't exist in db
@@ -151,8 +152,11 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 
       //store values to DB
       Database DB("EN");
-      if (check_user_name(buf)){ //hvis finnes ikke lag ny bruker
+    
+      if (DB.checkUserExist(buf2)){ //hvis finnes ikke lag ny bruker
         DB.write_user(buf2, height);
+        DB.get_last_user();
+        DB.print_to_lcd();
       }
       else { //ellers oppdater eksisterende
         DB.update_user_height(buf2, height);
@@ -173,7 +177,7 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 
       //check in database //dbCheck to return false if user not found in DB
       Database DB("EN");
-      bool user_in_db = DB.check_user_name(buf);
+      bool user_in_db = DB.checkUserExist(buf);
 
       //bool user_in_db = false; //dummy for testing
 
@@ -205,7 +209,7 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       //check in database //dbCheck to return false if user not found in DB
       //bool user_in_db = false; // dummy for test
       Database DB("EN");
-      bool user_in_db = DB.check_user_name(buf);
+      bool user_in_db = DB.checkUserExist(buf);
 
 
       if (user_in_db == true) { //if user exist in db
@@ -280,3 +284,4 @@ int main(int argc, char *argv[]) {
 
 //compile on windows
 //g++ -o main-dynamic.exe ./libs/mongoose.c ./libs/mjson.c -lwsock32 main-dynamic.cpp -std=c++17
+//g++ -Wall -g -o RP2-dynamic main-dynamic.cpp database.h database.cpp Coms_EN.h Coms_EN.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h lcd602.c lcd1602.h ./libs/mongoose.c ./libs/mjson.c tinyxml2.cpp -lsqlite3 --std=c++17 -lstdc++fs
