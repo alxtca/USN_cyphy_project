@@ -16,7 +16,7 @@ int measureHeight(){
 	/* -------Setup-------- */
 	int COM_port = {24}; // COM port number for device: /dev/ttyACM0 (Arduino MEGA)
 	int baud_rate = {115200}; //chosen baud rate
-	char mode[] = {'8', 'N', '1'}; //Mode setup: {8 data bits, no parity, 1 stop bit}
+	char mode[] = {'8', 'N', '1', 0}; //Mode setup: {8 data bits, no parity, 1 stop bit}
 	
 	char outgoing[BUF_SIZE]; // Buffer for outgoing message
 	unsigned char incoming[BUF_SIZE]; // Buffer for incoming message
