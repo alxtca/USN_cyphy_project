@@ -66,8 +66,8 @@ class Database
 		bool update_user_height(std::string name,int h);
 		/*Return height of user with name name*/
 		int return_user_height(std::string name);
-		static int callback_checkUserExist(void* NotUsed, int args, char** argv, char** azColName);
-		bool checkUserExist(std::string user_n);
+		static int callback_username_Exist(void* NotUsed, int args, char** argv, char** azColName);
+		bool username_Exist(std::string user_n);
 		bool user_exist;
 
 };

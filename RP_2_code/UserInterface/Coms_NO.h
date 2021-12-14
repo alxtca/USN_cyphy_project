@@ -11,7 +11,7 @@ public:
 	/*Menu for new user */
 	void menu_new(); 
 	/*Menu for getting exicting user data*/
-	void menu_existing();
+	void menu_excisting();
 	/*Menu for system settings*/
 	void menu_settings();
 	/*Goodbye message*/

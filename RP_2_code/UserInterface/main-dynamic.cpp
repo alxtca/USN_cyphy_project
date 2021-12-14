@@ -13,10 +13,11 @@
 //#include "button.h"
 
 
-
 // Just for convenience
 using namespace inja;
 namespace fs = std::filesystem;
+
+Database DB("EN");
 
 //for returns from fileFind
 struct FileFindReturn {
@@ -76,9 +77,6 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     struct mg_http_message *hm = (struct mg_http_message *) ev_data;
     json data;
     data["error"] = ""; data["title"] = "";
-    //database //move to related links
-    //Database DB;
-    //DB.create_table(); 
 
 // --------------------  INDEX page -----------------------------------------------
     if (mg_http_match_uri(hm, "/")) {
@@ -105,10 +103,9 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       std::cout << "extracted: " << buf << std::endl;
 
       //check in database //dbCheck to return false if user not found in DB
-      Database DB("EN");
-      bool user_in_db = DB.checkUserExist(buf);
-      //bool user_in_db = false; // dummy for testing
-
+      //Database DB("EN");
+      bool user_in_db = DB.username_Exist(buf); //if exist return true, if not return false
+      std::cout << "Server - user exist in db: " << user_in_db << std::endl;
       if (user_in_db == false) { //if user does't exist in db
         data["u_name"] = buf;
         data["title"] = "Bruker navn er ledig.";
@@ -151,9 +148,9 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       mg_http_reply(c, 200, NULL, result3.c_str());
 
       //store values to DB
-      Database DB("EN");
+      //Database DB("EN");
     
-      if (DB.checkUserExist(buf2)){ //hvis finnes ikke lag ny bruker
+      if (DB.username_Exist(buf2) == false){ //hvis finnes ikke lag ny bruker
         DB.write_user(buf2, height);
         DB.get_last_user();
         DB.print_to_lcd();
@@ -176,8 +173,8 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       std::cout << "extracted: " << buf << std::endl;
 
       //check in database //dbCheck to return false if user not found in DB
-      Database DB("EN");
-      bool user_in_db = DB.checkUserExist(buf);
+      //Database DB("EN");
+      bool user_in_db = DB.username_Exist(buf);
 
       //bool user_in_db = false; //dummy for testing
 
@@ -208,8 +205,8 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 
       //check in database //dbCheck to return false if user not found in DB
       //bool user_in_db = false; // dummy for test
-      Database DB("EN");
-      bool user_in_db = DB.checkUserExist(buf);
+      //Database DB("EN");
+      bool user_in_db = DB.username_Exist(buf);
 
 
       if (user_in_db == true) { //if user exist in db
@@ -247,8 +244,8 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     }
 //-------------------- SET BASELINE------------------
     else if (mg_http_match_uri(hm, "/set_baseline")) {
-      //int baseline = readDistanceAndUpdateXml();
-      int baseline = 230; //dummy for testing
+      int baseline = readDistanceAndUpdateXml();
+      //int baseline = 230; //dummy for testing
       data["baseline"] = baseline;
 
       std::string result = render("{% include \"html/display_new_baseline.html\" %}", data);
@@ -274,6 +271,9 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 int main(int argc, char *argv[]) {
   struct mg_mgr mgr;
   mg_mgr_init(&mgr);                                        // Init manager
+
+  DB.create_table(); 
+
   mg_http_listen(&mgr, "http://localhost:8000", fn, &mgr);  // Setup listener
   for (;;) mg_mgr_poll(&mgr, 1000);                         // Event loop
   mg_mgr_free(&mgr);                                        // Cleanup
@@ -284,4 +284,4 @@ int main(int argc, char *argv[]) {
 
 //compile on windows
 //g++ -o main-dynamic.exe ./libs/mongoose.c ./libs/mjson.c -lwsock32 main-dynamic.cpp -std=c++17
-//g++ -Wall -g -o RP2-dynamic main-dynamic.cpp database.h database.cpp Coms_EN.h Coms_EN.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h lcd602.c lcd1602.h ./libs/mongoose.c ./libs/mjson.c tinyxml2.cpp -lsqlite3 --std=c++17 -lstdc++fs
+//g++ -Wall -g -o RP2-dynamic main-dynamic.cpp database.h database.cpp Coms_EN.h Coms_EN.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h lcd1602.c lcd1602.h ./libs/mongoose.c ./libs/mjson.c tinyxml2.cpp -lsqlite3 --std=c++17 -lstdc++fs

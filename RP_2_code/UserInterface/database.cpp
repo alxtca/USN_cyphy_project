@@ -13,26 +13,34 @@ int Database::callback(void* NotUsed, int num_results, char** values, char** col
     return 0;
 }
 
-int Database::callback_checkUserExist(void* NotUsed, int args, char** argv, char** azColName){
-    if(argv > 0){
-        p_this_db->user_exist = true;
+int Database::callback_username_Exist(void* NotUsed, int args, char** argv, char** azColName){
+    if(args > 0){
+        p_this_db->user_exist = true; //Yes
+        std::cout << "argv > 0 " << std::endl;
     }
-    else p_this_db->user_exist = false;
-
+    else {
+        p_this_db->user_exist = false; //No
+        std::cout << "argv !> 0 "<< std::endl;
+    }
+    
     return 0;
 }
 
-bool Database::checkUserExist(std::string user_n) {
+bool Database::username_Exist(std::string user_n) {
+    user_exist = false;
     char* errMsg;
     int exit = open_database();
+    std::cout << "going to check user name in db: " << user_n << std::endl;
     if (!exit) {//Database opened succsessfully
+        std::cout << "inne i if(!exit): " << std::endl;
         std::string sql = "SELECT * FROM USER WHERE NAME = '"+user_n+"'";
-        int rc = sqlite3_exec(DB, sql.c_str(), callback_checkUserExist, NULL, &errMsg);
+        int rc = sqlite3_exec(DB, sql.c_str(), callback_username_Exist, 0, &errMsg);
         if (rc != SQLITE_OK){
             std::cout << "select error" << errMsg<< std::endl;
         }
     }
     close_database();
+    std::cout << "user_exist "<< p_this_db->user_exist << std::endl;
     return p_this_db->user_exist;
 
 }

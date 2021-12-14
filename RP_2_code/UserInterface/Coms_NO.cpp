@@ -21,7 +21,7 @@ void Coms::menu_new()
 		<< "0 : Tilbake" << std::endl;
 }
 
-void Coms::menu_existing()
+void Coms::menu_excisting()
 {
 	std::cout << "Eksterende måling:" << std::endl
 		<< "1 : Søk etter måling" << std::endl

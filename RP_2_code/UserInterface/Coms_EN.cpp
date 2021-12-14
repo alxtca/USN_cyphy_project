@@ -21,7 +21,7 @@ void Coms::menu_new()
 		<< "0 : Back to main menu" << std::endl;
 }
 
-void Coms::menu_existing()
+void Coms::menu_excisting()
 {
 	std::cout << "Excisting measurments menu:" << std::endl
 		<< "1 : Search for measurment" << std::endl
