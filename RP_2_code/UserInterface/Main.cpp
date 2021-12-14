@@ -90,8 +90,8 @@ int main(int argc, char *argv[])
             }
 
         }
-        else if (m == 3) {// menu for getting exicting user data
-            user_comms.menu_excisting();
+        else if (m == 3) {// menu for getting existing user data
+            user_comms.menu_existing();
             um = user_comms.get_menu_int(2);
             if (um == 1) {
                 m = 3;//---loop back to existing menu----
