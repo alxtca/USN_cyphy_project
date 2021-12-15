@@ -128,14 +128,13 @@ int main(int argc, char *argv[])
             if (um == 1) { // Read XMl file and save system values
                 m = 4;//---loop back to settings menu----
                 um = 0;
-                //----------------------------- TO DO --------------------------------
                 DB.create_table();// Create the table in database
                 if (readDistanceAndUpdateXml() != 0) {
                     std::cout << "Xml: Read/Uppdate Successful" << std::endl << std::endl;
 
                 }
                 else user_comms.error_message("Error reading/uppdating xml");
-                //----------------------------- TO DO --------------------------------
+          
 
             }
             else if (um == 2) { // Renew default height sensor distance
