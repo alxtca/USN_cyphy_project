@@ -10,7 +10,7 @@ public:
 	void menu_main();
 	/*Menu for new user */
 	void menu_new(); 
-	/*Menu for getting exicting user data*/
+	/*Menu for getting existing user data*/
 	void menu_excisting();
 	/*Menu for system settings*/
 	void menu_settings();
