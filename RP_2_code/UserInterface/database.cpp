@@ -81,7 +81,7 @@ void Database::send_to_lcd() { // Write to lcd code
     lcd1602WriteString(line1ToPrint);    // write to top line
     //Show height:
     lcd1602SetCursor(0, 1); // change line position, character 0, line 1
-    char line2ToPrint[p_height.size() + 1]{};     // reset print array
+    char line2ToPrint[p_height.size() + 1]{};     // prepare new print array
     p_height.copy(line2ToPrint, p_height.size() + 1);   // copy height-string to print array
     line2ToPrint[p_height.size()] = '\0';       // adding stop character
     lcd1602WriteString(line2ToPrint);    // write to bottom line
