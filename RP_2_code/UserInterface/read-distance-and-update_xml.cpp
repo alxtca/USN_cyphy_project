@@ -42,10 +42,8 @@ int storeHeightInXML(int new_sensor_position){
 
 int readDistanceAndUpdateXml() {
     //request distance
-    char request_message[] = "height"; //curretly only one request is supported
-    /* Choose what distance, eg live system or local */
-    int distance = sendRequest(request_message); // For live system, // the line below
-    //int distance = 200; // For local test, // the line above
+    char request_message[] = "height";
+    int distance = sendRequest(request_message);
 
 
     if (distance == 10000) {
@@ -54,9 +52,9 @@ int readDistanceAndUpdateXml() {
     }
     else {
         std::cout << "Height to sensor is: " << distance << std::endl;
-        //store sensor position in tag "sensor" in file data.txt 
     }
-
+    
+  //store sensor position in tag "sensor" in file data.txt 
     if (storeHeightInXML(distance)){
         std::cout << "Height to sensor saved: " << distance << std::endl;
     } 
@@ -65,5 +63,5 @@ int readDistanceAndUpdateXml() {
         std::cout << "something went wrong " << std::endl;
     }
 
-    return 1;
+    return distance;
 }

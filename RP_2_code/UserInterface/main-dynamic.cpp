@@ -13,10 +13,11 @@
 //#include "button.h"
 
 
-
 // Just for convenience
 using namespace inja;
 namespace fs = std::filesystem;
+
+Database DB("EN");
 
 //for returns from fileFind
 struct FileFindReturn {
@@ -76,9 +77,6 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     struct mg_http_message *hm = (struct mg_http_message *) ev_data;
     json data;
     data["error"] = ""; data["title"] = "";
-    //database //move to related links
-    //Database DB;
-    //DB.create_table(); 
 
 // --------------------  INDEX page -----------------------------------------------
     if (mg_http_match_uri(hm, "/")) {
@@ -179,6 +177,7 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
       Database DB("EN");
       bool user_in_db = DB.checkUserExist(buf);
 
+
       //bool user_in_db = false; //dummy for testing
 
       if (user_in_db == true) { //if user exist in db
@@ -247,8 +246,8 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
     }
 //-------------------- SET BASELINE------------------
     else if (mg_http_match_uri(hm, "/set_baseline")) {
-      //int baseline = readDistanceAndUpdateXml();
-      int baseline = 230; //dummy for testing
+      int baseline = readDistanceAndUpdateXml();
+      //int baseline = 230; //dummy for testing
       data["baseline"] = baseline;
 
       std::string result = render("{% include \"html/display_new_baseline.html\" %}", data);
@@ -274,6 +273,9 @@ static void fn(struct mg_connection *c, int ev, void *ev_data, void *fn_data) {
 int main(int argc, char *argv[]) {
   struct mg_mgr mgr;
   mg_mgr_init(&mgr);                                        // Init manager
+
+  DB.create_table(); 
+
   mg_http_listen(&mgr, "http://localhost:8000", fn, &mgr);  // Setup listener
   for (;;) mg_mgr_poll(&mgr, 1000);                         // Event loop
   mg_mgr_free(&mgr);                                        // Cleanup
@@ -284,4 +286,5 @@ int main(int argc, char *argv[]) {
 
 //compile on windows
 //g++ -o main-dynamic.exe ./libs/mongoose.c ./libs/mjson.c -lwsock32 main-dynamic.cpp -std=c++17
-//g++ -Wall -g -o RP2-dynamic main-dynamic.cpp database.h database.cpp Coms_EN.h Coms_EN.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h lcd602.c lcd1602.h ./libs/mongoose.c ./libs/mjson.c tinyxml2.cpp -lsqlite3 --std=c++17 -lstdc++fs
+//g++ -Wall -g -o RP2-dynamic main-dynamic.cpp database.h database.cpp Coms_EN.h Coms_EN.cpp read-distance-and-update-xml.h read-distance-and-update_xml.cpp send-distance-request.h send-distance-request.cpp take-height-measurement.h take-height-measurement.cpp tinyxml2.h lcd1602.c lcd1602.h ./libs/mongoose.c ./libs/mjson.c tinyxml2.cpp -lsqlite3 --std=c++17 -lstdc++fs
+

@@ -37,46 +37,46 @@ void loop() {
     if(Serial.readString() == "start"){
       buzzDown(); // audible signal for user to get in position 
       digitalWrite(LED_pin, HIGH); //LED on, while measurements taken
-      take_measurements();  //start measurement routine
+      take_measurements();  //start measurement
     }
   }
 }
 
-
+// Making some timed noises
 void buzzDown(){
-  int interval{850};
-  float multiplier{0.8};
+  int interval{900};
+  float multiplier{0.7};
   unsigned int frequency{440}; // 440 Hz A4
-  for(int i{0}; i < 2; i++){
+  for(int i{0}; i < 3; i++){
     buzz.tone(frequency/2);
-    delay(150);
+    delay(100);
     buzz.noTone();
-    delay(850);
+    delay(900);
   }
  
   for(int i{0}; i < 8; i++){
-    buzz.tone(frequency/2); //parameter: frequency
-    delay(150*multiplier);
+    buzz.tone(frequency/2); // 220 Hz A3
+    delay(100*multiplier);
     buzz.noTone();
-    interval *= multiplier; //decrease interval
+    interval *= multiplier; //decrease interval (speed up)
     delay(interval);
     
   }
   
-  for(int i {}; i < 4; i++){
-    buzz.tone(frequency/2); //parameter: frequency
-    delay(150*multiplier);
+  for(int i {0}; i < 8; i++){
+    buzz.tone(frequency/2); // 220 Hz A3
+    delay(50);
     buzz.noTone();
     delay(interval);
   }
-  
+  delay(50);
   buzz.tone(2 * frequency); // 880 Hz A5
   delay(750);
   buzz.noTone(); 
 }
 
 void take_measurements(){
-  //Fill array with measurement samples
+  //Taking samples
   
   for(int i = 0 ; i < no_of_samples; i++){
     delay(50); // wait 50 ms between each sample to avoid cross reading
@@ -86,22 +86,22 @@ void take_measurements(){
 }
 
 void find_average(){
-  float sum{0}; //sum as float makes division more accurate
+  
+  float sum{0}; //sum of samples, float makes division more accurate
+  int average{0}; // to store average distance
   
   //sum of samples
   for(int i = 0 ; i < no_of_samples; i++){
     sum += samples[i];
   }
 
-  
-  int average{0}; // to store average distance
   average = round(sum/no_of_samples); //Round float division to nearest whole number. 
 
   
-  //Print average to Serial
-  //Serial.write("Average: ");
+  //Send average to Serial
+    //Serial.write("Average: ");
   Serial.print(average);
-  //Serial.write(" cm \n");
+    //Serial.write(" cm \n");
 
   digitalWrite(LED_pin, LOW); //LED off, when measurement sent
 }

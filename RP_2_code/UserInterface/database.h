@@ -71,3 +71,4 @@ class Database
 		bool user_exist;
 
 };
+
