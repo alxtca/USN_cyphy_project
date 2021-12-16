@@ -1,4 +1,4 @@
-Tequirements
+Requirements
 
 Files needed:
 
@@ -19,3 +19,5 @@ Library setup:
     
 
 Hardwere needed:
+Raspberry pi 400
+Rasperry pi
