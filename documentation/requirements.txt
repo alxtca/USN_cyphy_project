@@ -17,7 +17,10 @@ Libraries needed:
     https://github.com/albertherd/LCD1602 - as of 16.12.2021
 
     wiringPi GPIO == 2.52
-    Pre-installed on Raspberry Pi 4B and 400
+    Pre-installed with Raspbian OS
+
+    TonePlayer (Arduino)
+    https://forum.arduino.cc/t/newping-tone-conflict/179755/4 - as of 16.12.2021
 
 
 Library setup:
