@@ -20,6 +20,5 @@ public:
 	void button_interrupt(); //Interrupt routine
 	void do_something(); //What happens uppon interrupts
 	void setup();
-
 };
 
