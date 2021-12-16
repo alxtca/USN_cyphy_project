@@ -6,9 +6,18 @@ Files needed:
     inja.hpp == 3.3
     tinyxml2.cpp == 9.0.0
 
-Libraries neded:
+Libraries needed:
     SQLite3 Source Code == 3.36.0
     Packaged in zip:       sqlite-amalgamation-3360000.zip
+
+    RS-232 for Linux, FreeBSD and windows
+    https://www.teuniz.net/RS-232/ - as of 16.12.2021
+
+    LCD1602
+    https://github.com/albertherd/LCD1602 - as of 16.12.2021
+
+    wiringPi GPIO == 2.52
+    Pre-installed on Raspberry Pi 4B and 400
 
 
 Library setup:
@@ -21,6 +30,19 @@ Library setup:
     
     
 
-Hardwere needed:
-Raspberry pi 400
-Rasperry pi
+Hardware needed:
+    Raspberry Pi 400
+    Raspberry Pi 4 Model B
+    Raspberry Pi Touch Display (optional)
+    Arduino Mega 2560
+    HC-RS04 ultrasonic sensor
+    1602A 16x2 LCD display w/i2c backpack
+    1x LED
+    1x 220 ohms resistor
+    1x piezo buzzer (any)
+    
+    
+
+
+
+
