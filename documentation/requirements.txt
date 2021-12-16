@@ -1,7 +1,10 @@
 Requirements
 
 Files needed:
-
+    mjson.c == 1.2.7
+    mongoose.c == 7.4
+    inja.hpp == 3.3
+    tinyxml2.cpp == 9.0.0
 
 Libraries neded:
     SQLite3 Source Code == 3.36.0
