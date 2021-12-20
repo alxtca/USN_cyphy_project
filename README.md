@@ -1,6 +1,6 @@
 # USN_cyphy_project
 
-Hight measure system
+Height measure system
 
 ## Contributors
 
